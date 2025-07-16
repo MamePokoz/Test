@@ -13,12 +13,12 @@ export const metadata = {
 export default function RootLayout({ children }) {
   return (
     <html lang="en">
-      <body className="antialiased">
-        <div className="container-fluid">
-          <div className="row">
-            <div className="col-12">
+      <body className="antialiased bg-gradient-to-br from-white via-purple-50 to-pink-100 text-gray-800">
+        <div className="container-fluid px-0">
+          <div className="row m-0">
+            <div className="col-12 p-0">
               <Navigation />
-              {children}
+              <main>{children}</main>
               <Card />
               <Footer />
             </div>

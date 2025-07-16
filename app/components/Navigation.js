@@ -23,7 +23,6 @@ export default function Navigation() {
             <li><a className="dropdown-item" href="/about">About</a></li>
             <li><a className="dropdown-item" href="/service">Service</a></li>
             <li><a className="dropdown-item" href="/contact">Contact</a></li>
-            <li><a className="dropdown-item" href="/ard">Contact</a></li>
             <li><hr className="dropdown-divider" /></li>
             <li><a className="dropdown-item" href="#">Something else here</a></li>
           </ul>
