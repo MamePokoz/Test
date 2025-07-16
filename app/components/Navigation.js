@@ -1,9 +1,26 @@
-'use cilent'
+'use client'
+import { useState } from 'react';
+
 export default function Navigation() {
+  const [searchTerm, setSearchTerm] = useState('');
+  const [results, setResults] = useState([]);
+
+  const items = ['Home', 'About', 'Service', 'Contact'];
+
+  const handleSearch = (e) => {
+    const value = e.target.value;
+    setSearchTerm(value);
+    const filtered = items.filter((item) =>
+      item.toLowerCase().includes(value.toLowerCase())
+    );
+    setResults(filtered);
+  };
+
   return (
+
     <nav className="navbar navbar-expand-lg bg-body-tertiary">
   <div className="container-fluid">
-    <a className="navbar-brand" href="#">FrontEnd</a>
+    <a className="navbar-brand" href="/">FrontEnd</a>
     <button className="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
       <span className="navbar-toggler-icon" />
     </button>
@@ -27,11 +44,35 @@ export default function Navigation() {
             <li><a className="dropdown-item" href="#">Something else here</a></li>
           </ul>
         </li>
+        <li className="nav-item">
+          <a className="nav-link" href="/login">login</a>
+        </li>
       </ul>
-      <form className="d-flex" role="search">
-        <input className="form-control me-2" type="search" placeholder="Search" aria-label="Search" />
-        <button className="btn btn-outline-success" type="submit">Search</button>
-      </form>
+      {/* Real-Time Search */}
+          <div className="position-relative ms-auto">
+            <input
+              className="form-control me-2"
+              type="search"
+              placeholder="Search"
+              value={searchTerm}
+              onChange={handleSearch}
+            />
+            {searchTerm && (
+              <ul className="list-group position-absolute mt-1 w-100 z-3">
+                {results.length > 0 ? (
+                  results.map((item, index) => (
+                    <li key={index} className="list-group-item">
+                      <a href={`/${item.toLowerCase()}`} className="text-decoration-none text-dark">
+                        {item}
+                      </a>
+                    </li>
+                  ))
+                ) : (
+                  <li className="list-group-item text-muted">No results found</li>
+                )}
+              </ul>
+            )}
+      </div>
     </div>
   </div>
 </nav>
