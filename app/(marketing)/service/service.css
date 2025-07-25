@@ -1,0 +1,86 @@
+.service-page {
+  min-height: 100vh;
+  padding: 3rem 1.5rem;
+  background: linear-gradient(90deg, #c3dafe 0%, #d6bcfa 50%, #fbb6ce 100%);
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.service-page h1 {
+  font-size: 3.5rem;
+  font-weight: 800;
+  color: #4338ca; /* indigo-700 */
+  text-align: center;
+  margin-bottom: 1rem;
+  text-shadow: 1px 1px 4px rgba(0,0,0,0.1);
+}
+
+.service-page h2 {
+  font-size: 1.75rem;
+  font-weight: 600;
+  color: #6b46c1; /* purple-800 */
+  text-align: center;
+  margin-bottom: 3rem;
+  max-width: 700px;
+}
+
+.service-page h2 span {
+  color: #d53f8c; /* pink-600 */
+}
+
+.services-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit,minmax(280px,1fr));
+  gap: 2rem;
+  width: 100%;
+  max-width: 1200px;
+}
+
+.service-card {
+  background: white;
+  border-radius: 1.25rem; /* 20px */
+  box-shadow: 0 10px 20px rgba(0,0,0,0.1);
+  padding: 2rem;
+  text-align: center;
+  transition: transform 0.3s ease;
+  cursor: default;
+}
+
+.service-card:hover {
+  transform: scale(1.05);
+}
+
+.service-icon {
+  font-size: 2.5rem;
+  margin-bottom: 1.5rem;
+  color: #4338ca; /* default indigo */
+}
+
+.service-title {
+  font-size: 1.25rem;
+  font-weight: 700;
+  color: #4338ca;
+  margin-bottom: 1rem;
+}
+
+.service-desc {
+  font-size: 1rem;
+  color: #4a5568; /* gray-600 */
+}
+
+/* Responsive */
+@media (max-width: 640px) {
+  .service-page h1 {
+    font-size: 2.5rem;
+  }
+  .service-page h2 {
+    font-size: 1.25rem;
+  }
+}
+
+.carousel {
+  position: relative; /* หรือ unset ถ้าอยากให้ flow ปกติ */
+  top: auto;
+  left: auto;
+}

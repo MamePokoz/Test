@@ -1,0 +1,65 @@
+.footer {
+  background: linear-gradient(to right, #2d3748, #1a202c, #000000);
+  color: #e2e8f0; /* สีเทาอ่อน */
+  padding: 2.5rem 1rem; /* py-10 px-4 */
+  margin-top: 4rem; /* mt-16 */
+  box-shadow: inset 0 2px 4px rgba(0, 0, 0, 0.6);
+}
+
+.container {
+  max-width: 1200px;
+  margin-left: auto;
+  margin-right: auto;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  align-items: center;
+  gap: 1.5rem;
+}
+
+@media (min-width: 768px) {
+  .container {
+    flex-direction: row;
+  }
+}
+
+.branding {
+  text-align: center;
+}
+
+@media (min-width: 768px) {
+  .branding {
+    text-align: left;
+  }
+}
+
+.title {
+  font-size: 1.5rem;
+  font-weight: 700;
+  margin-bottom: 0.5rem;
+  color: #f7fafc; /* ขาวอมฟ้าอ่อน */
+}
+
+.copy {
+  font-size: 0.875rem;
+  color: #a0aec0; /* เทาอ่อน */
+}
+
+/* ถ้าเปิดใช้งาน navigation ให้ใช้ styles นี้ */
+/*
+.nav {
+  display: flex;
+  gap: 1.5rem;
+  color: #cbd5e0;
+}
+
+.navLink {
+  color: #cbd5e0;
+  text-decoration: none;
+  transition: color 0.3s ease-in-out;
+}
+
+.navLink:hover {
+  color: #63b3ed; // ฟ้าอ่อน
+}
+*/
