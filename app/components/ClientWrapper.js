@@ -11,7 +11,7 @@ export default function ClientWrapper({ children }) {
 
   return (
     <>
-      <Navigation />
+      {!hideExtras && <Navigation />}
       <main>{children}</main>
       {!hideExtras && <Card />}
       {!hideExtras && <Footer />}
