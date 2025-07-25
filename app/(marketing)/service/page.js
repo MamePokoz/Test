@@ -1,15 +1,9 @@
-<<<<<<< HEAD
 import './service.css'
 export default function Service() {
   return (
     <div className="service-page">
     <div className="flex flex-col items-center justify-center min-h-screen bg-gradient-to-r from-indigo-100 via-purple-100 to-pink-100 px-6">
       <Carousel />
-=======
-export default function Service() {
-  return (
-    <div className="flex flex-col items-center justify-center min-h-screen bg-gradient-to-r from-indigo-100 via-purple-100 to-pink-100 px-6">
->>>>>>> 9be121d1490086dfb5ca0046d9b9c4648191c034
       <h1 className="text-6xl text-center text-indigo-700 font-extrabold mb-6 drop-shadow-lg">
         Service Page
       </h1>
@@ -17,9 +11,6 @@ export default function Service() {
         Supalerk audomkasop <span className="text-pink-600">038</span>
       </h2>
     </div>
-<<<<<<< HEAD
     </div>
-=======
->>>>>>> 9be121d1490086dfb5ca0046d9b9c4648191c034
   );
 }
