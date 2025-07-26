@@ -21,7 +21,7 @@ export default function Login() {
     <div className="login-page">
       <div className="login-container">
         <form onSubmit={handleSubmit} className="login-form">
-          <h2 className="form-title">Create Account</h2>
+          <h2 className="form-title">Login</h2>
 
           <input
             type="email"
