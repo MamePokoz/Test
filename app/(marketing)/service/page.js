@@ -1,11 +1,9 @@
 import './service.css'
-import Carousel from './components/Carousel';
 
 export default function Service() {
   return (
     <div className="service-page">
     <div className="flex flex-col items-center justify-center min-h-screen bg-gradient-to-r from-indigo-100 via-purple-100 to-pink-100 px-6">
-      <Carousel />
       <h1 className="text-6xl text-center text-indigo-700 font-extrabold mb-6 drop-shadow-lg">
         Service Page
       </h1>
