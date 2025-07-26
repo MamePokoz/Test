@@ -1,4 +1,6 @@
 import './service.css'
+import Carousel from './components/Carousel';
+
 export default function Service() {
   return (
     <div className="service-page">
