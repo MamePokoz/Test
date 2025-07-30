@@ -6,14 +6,14 @@ import { useRouter } from 'next/navigation'
 import './styleRegister.css'
 
 export default function Register() {
-  const [firstname, setFirstname] = useState('Mr.')
+  const [firstname, setFirstname] = useState('')
   const [fullname, setFullname] = useState('')
   const [lastname, setLastname] = useState('')
   const [username, setUsername] = useState('')
   const [password, setPassword] = useState('')
   const [confirmPassword, setConfirmPassword] = useState('')
   const [address, setAddress] = useState('')
-  const [sex, setSex] = useState('Male')
+  const [sex, setSex] = useState('')
   const [birthday, setBirthday] = useState('')
   const [agreed, setAgreed] = useState(false)
 
@@ -39,8 +39,6 @@ export default function Register() {
       })
       return
     }
-
-    const fullname = `${firstname} ${lastname}`
 
     try {
       const res = await fetch('http://itdev.cmtc.ac.th:3000/api/users', {
@@ -77,7 +75,7 @@ export default function Register() {
         setPassword('')
         setConfirmPassword('')
         setAddress('')
-        setSex('Male')
+        setSex('')
         setBirthday('')
         setAgreed(false)
 
@@ -105,7 +103,9 @@ export default function Register() {
           <h2 className="form-title">Create Account</h2>
 
           <select value={firstname} onChange={(e) => setFirstname(e.target.value)} required>
+            <option value="" disabled hidden>Select Firstname</option>
             <option value="Mr.">Mr.</option>
+            <option value="Ms.">Ms.</option>
             <option value="Mrs.">Mrs.</option>
             <option value="Other">Other</option>
           </select>
@@ -158,6 +158,7 @@ export default function Register() {
           />
 
           <select value={sex} onChange={(e) => setSex(e.target.value)} required>
+            <option value="" disabled hidden>Select sex</option>
             <option value="Male">Male</option>
             <option value="Female">Female</option>
             <option value="Other">Other</option>
