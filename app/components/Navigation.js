@@ -78,7 +78,7 @@ export default function Navigation() {
                 <li><a className="dropdown-item" href="/service">Service</a></li>
                 <li><a className="dropdown-item" href="/contact">Contact</a></li>
                 <li><hr className="dropdown-divider" /></li>
-                <li><a className="dropdown-item" href="/admin/users">Something else here</a></li>
+                <li><a className="dropdown-item" href="/admin/users"> Admin </a></li>
               </ul>
             </li>
 
