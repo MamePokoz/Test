@@ -13,7 +13,7 @@ export default function ClientWrapper({ children }) {
 
   // ซ่อน Card เฉพาะหน้า contact
   const hideCard = pathname === '/contact' || pathname === '/service' || pathname === '/about' || pathname === '/register' 
-  || pathname === '/login'|| pathname.startsWith('/player/');
+  || pathname === '/login'|| pathname.startsWith('/player/') || pathname === '/admin/users'
 
 
   const HideNav = pathname  === '/about'
