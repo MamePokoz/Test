@@ -1,6 +1,8 @@
 'use client';
 import Link from 'next/link'
 import { useEffect, useState } from 'react';
+import './users.css'; 
+
 
 export default function Page() {
   const [items, setItems] = useState([]);
