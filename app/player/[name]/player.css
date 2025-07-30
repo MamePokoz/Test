@@ -1,0 +1,32 @@
+.player-container {
+  max-width: 800px;
+  margin: 40px auto;
+  padding: 30px;
+  background: linear-gradient(to bottom right, #0b1e63, #870000);
+  color: #fff;
+  font-family: 'Segoe UI', sans-serif;
+  border-radius: 20px;
+  box-shadow: 0 15px 40px rgba(0, 0, 0, 0.4);
+  text-align: center; /* ช่วยให้ข้อความตรงกลางด้วย */
+}
+
+.card {
+  padding: 20px;
+}
+
+.player-image {
+  display: block;
+  margin: 0 auto 20px auto;
+  width: 180px;
+  height: 180px;
+  object-fit: cover;        /* ตัดภาพให้พอดีกรอบ */
+  border-radius: 50%;       /* ทำให้กลม */
+  border: 5px solid #fcba03;
+  box-shadow: 0 10px 25px rgba(0, 0, 0, 0.4);
+  transition: transform 0.3s ease-in-out;
+}
+
+.player-image:hover {
+  transform: scale(1.05);   /* เพิ่มเอฟเฟกต์ตอน hover */
+}
+
