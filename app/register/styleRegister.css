@@ -1,0 +1,104 @@
+@import url('https://fonts.googleapis.com/css2?family=Montserrat:wght@400;600&display=swap');
+
+body {
+  margin: 0;
+  padding: 0;
+  font-family: 'Montserrat', sans-serif;
+  height: 100vh;
+  background: white;
+}
+
+.register-page {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 100vh;
+  background-image: url('/images/ball/Login.jpg');
+  margin: 0;
+  padding: 0;
+}
+
+/* ตัวกล่องฟอร์ม */
+.register-container {
+  background: white;
+  padding: 40px 30px;
+  border-radius: 15px;
+  box-shadow: 0 20px 40px rgba(0, 0, 0, 0.2);
+  width: 100%;
+  max-width: 400px;
+  box-sizing: border-box;
+}
+
+
+.register-form {
+  display: flex;
+  flex-direction: column;
+  gap: 15px;
+}
+
+.form-title {
+  text-align: center;
+  margin-bottom: 10px;
+  color: #333;
+}
+
+.register-form input,
+.register-form select {
+  padding: 12px 15px;
+  border: 1px solid #ddd;
+  border-radius: 8px;
+  background: #f7f7f7;
+  font-size: 14px;
+  transition: 0.3s ease;
+}
+
+.register-form input:focus,
+.register-form select:focus {
+  border-color: #ff4b2b;
+  outline: none;
+  background: #fff;
+}
+
+.checkbox-container {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  font-size: 13px;
+  color: #444;
+}
+
+.checkbox-container input {
+  transform: scale(1.2);
+}
+
+.register-form button {
+  padding: 12px;
+  background: linear-gradient(to right, #ff4b2b, #ff416c);
+  color: white;
+  font-weight: bold;
+  border: none;
+  border-radius: 25px;
+  cursor: pointer;
+  transition: background 0.3s ease, transform 0.2s ease;
+}
+
+.register-form button:hover {
+  background: #ff3a2b;
+  transform: translateY(-2px);
+}
+
+.login-link {
+  text-align: center;
+  font-size: 13px;
+  color: #555;
+}
+
+.login-link a {
+  color: #ff4b2b;
+  text-decoration: none;
+  font-weight: bold;
+}
+
+.login-link a:hover {
+  text-decoration: underline;
+}

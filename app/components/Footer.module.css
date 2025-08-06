@@ -1,0 +1,56 @@
+.footer {
+  background: linear-gradient(to right, #2d3748, #1a202c, #000000);
+  color: #e2e8f0;
+  padding: 3rem 1rem;
+  margin-top: 4rem;
+  box-shadow: inset 0 2px 4px rgba(0, 0, 0, 0.6);
+}
+
+.container {
+  max-width: 1200px;
+  margin: 0 auto;
+}
+
+.title {
+  font-size: 1.75rem;
+  font-weight: 700;
+  margin-bottom: 1rem;
+  color: #f7fafc;
+}
+
+.subTitle {
+  font-size: 1.2rem;
+  font-weight: 600;
+  margin-bottom: 1rem;
+  color: #edf2f7;
+}
+
+.nav {
+  display: flex;
+  flex-direction: column;
+  gap: 0.4rem;
+}
+
+.navLink {
+  color: #cbd5e0;
+  text-decoration: none;
+  font-weight: 500;
+  transition: color 0.3s ease-in-out;
+}
+
+.navLink:hover {
+  color: #63b3ed;
+  text-decoration: underline;
+}
+
+.contactItem {
+  font-size: 0.95rem;
+  color: #a0aec0;
+  margin: 0.3rem 0;
+}
+
+.copy {
+  font-size: 0.875rem;
+  color: #a0aec0;
+  margin-top: 2rem;
+}
