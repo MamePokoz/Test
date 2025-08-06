@@ -1,0 +1,23 @@
+/* styles/global.css */
+body {
+  margin: 0;
+  padding: 0;
+  background: linear-gradient(
+    135deg,
+    #004D98 0%,
+    #A50044 25%,
+    #004D98 50%,
+    #A50044 75%,
+    #004D98 100%
+  );
+  background-size: 400% 400%;
+  animation: barcelonaGradient 15s ease infinite;
+  color: #fff;
+  font-family: 'Segoe UI', sans-serif;
+}
+
+@keyframes barcelonaGradient {
+  0% { background-position: 0% 50%; }
+  50% { background-position: 100% 50%; }
+  100% { background-position: 0% 50%; }
+}
