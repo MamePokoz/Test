@@ -1,0 +1,47 @@
+/* Navigation.css */
+
+.barca-navbar {
+  background: linear-gradient(to right, #004D98, #A50044);
+  color: #fff;
+  padding: 0.75rem 1rem;
+  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+}
+
+.barca-brand {
+  font-weight: bold;
+  color: #ffcb05 !important;
+  font-size: 1.5rem;
+}
+
+.barca-link {
+  color: #ffffff !important;
+  font-weight: 500;
+  transition: all 0.3s ease;
+}
+
+.barca-link:hover {
+  color: #ffcb05 !important;
+}
+
+.barca-dropdown {
+  background-color: #ffffff;
+  border: none;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
+}
+
+.barca-search-container {
+  max-width: 250px;
+}
+
+.barca-search {
+  border-radius: 20px;
+  padding: 0.5rem 1rem;
+}
+
+.barca-search-dropdown {
+  max-height: 250px;
+  overflow-y: auto;
+  background-color: #fff;
+  border: 1px solid #ccc;
+  border-radius: 0 0 10px 10px;
+}

@@ -1,48 +1,83 @@
 .wrapper {
-  background: linear-gradient(to bottom right, #1e1e2f, #27293d);
+  background: linear-gradient(to bottom right, #0f0c29, #302b63, #24243e);
   min-height: 100vh;
   display: flex;
   justify-content: center;
   align-items: center;
   padding: 2rem;
+  position: relative;
+  overflow: hidden;
+}
+
+.wrapper::before {
+  content: "";
+  position: absolute;
+  top: -50%;
+  left: -50%;
+  width: 200%;
+  height: 200%;
+  background: radial-gradient(circle, rgba(255, 255, 255, 0.03), transparent);
+  animation: rotateBg 30s linear infinite;
+  z-index: 0;
+}
+
+@keyframes rotateBg {
+  from {
+    transform: rotate(0deg);
+  }
+  to {
+    transform: rotate(360deg);
+  }
 }
 
 .glassCard {
-  background: rgba(255, 255, 255, 0.07);
-  backdrop-filter: blur(12px);
-  border-radius: 20px;
-  padding: 2rem 3rem;
-  max-width: 800px;
+  position: relative;
+  z-index: 1;
+  background: rgba(255, 255, 255, 0.08);
+  backdrop-filter: blur(16px);
+  border-radius: 24px;
+  padding: 2.5rem 3rem;
+  max-width: 840px;
   width: 100%;
   color: #fff;
-  box-shadow: 0 8px 32px rgba(0, 0, 0, 0.2);
-  border: 1px solid rgba(255, 255, 255, 0.1);
-  animation: fadeIn 1.2s ease;
+  box-shadow: 0 12px 40px rgba(0, 0, 0, 0.25);
+  border: 1px solid rgba(255, 255, 255, 0.12);
+  transition: transform 0.3s ease;
+}
+
+.glassCard:hover {
+  transform: translateY(-5px);
 }
 
 .title {
-  font-size: 3rem;
-  font-weight: bold;
+  font-size: 3.2rem;
+  font-weight: 800;
   text-align: center;
   background: linear-gradient(to right, #ff6ec4, #7873f5);
-  margin-bottom: 0.5rem;
+  margin-bottom: 1rem;
 }
 
 .subtitle {
   text-align: center;
-  color: #ccc;
-  margin-bottom: 2rem;
-  font-size: 1.2rem;
+  color: #ddd;
+  margin-bottom: 2.2rem;
+  font-size: 1.25rem;
+  line-height: 1.8;
 }
 
 .section {
-  margin-bottom: 2rem;
+  margin-bottom: 2.5rem;
 }
 
 .section h2 {
-  font-size: 1.5rem;
-  color: #ffcb57;
-  margin-bottom: 0.5rem;
+  font-size: 1.6rem;
+  color: #ffd369;
+  margin-bottom: 0.6rem;
+}
+
+.section p {
+  line-height: 1.7;
+  color: #eee;
 }
 
 .list {
@@ -50,29 +85,31 @@
   padding-left: 1rem;
 }
 
-.list li::before {
-  content: "⚽";
-  margin-right: 0.5rem;
-  color: #6ec1e4;
+.list li {
+  margin-bottom: 0.6rem;
+  font-size: 1.05rem;
 }
 
-@keyframes fadeIn {
-  from {
-    opacity: 0;
-    transform: translateY(30px);
-  }
-  to {
-    opacity: 1;
-    transform: translateY(0);
-  }
+.list li::before {
+  content: "⚽";
+  margin-right: 0.6rem;
+  color: #6ec1e4;
 }
 
 @media (max-width: 768px) {
   .glassCard {
-    padding: 1.5rem;
+    padding: 1.8rem 1.5rem;
   }
 
   .title {
     font-size: 2.2rem;
+  }
+
+  .subtitle {
+    font-size: 1rem;
+  }
+
+  .section h2 {
+    font-size: 1.3rem;
   }
 }

@@ -1,9 +1,15 @@
 
 .contact-container {
-  background: linear-gradient(135deg, #004aad, #870000);
-  background-repeat: no-repeat;
-  background-size: cover;
-  background-attachment: fixed;
+  background: linear-gradient(
+    135deg,
+    #004D98 0%,
+    #A50044 25%,
+    #004D98 50%,
+    #A50044 75%,
+    #004D98 100%
+  );
+  background-size: 400% 400%;
+  animation: barcelonaGradient 15s ease infinite;
   color: #fff;
   border: 2px solid #fcba03;
   padding: 30px 25px;
@@ -12,6 +18,18 @@
   font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
   max-width: 700px;
   margin: 40px auto;
+}
+
+@keyframes barcelonaGradient {
+  0% {
+    background-position: 0% 50%;
+  }
+  50% {
+    background-position: 100% 50%;
+  }
+  100% {
+    background-position: 0% 50%;
+  }
 }
 
 .contact-container h1 {

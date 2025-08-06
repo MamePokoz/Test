@@ -1,0 +1,16 @@
+.carouselWrapper {
+  max-width: 100%;
+  margin: 0 auto;
+}
+
+.imageWrapper {
+  aspect-ratio: 16 /9;
+  position: relative;
+  width: 100%;
+}
+
+@media (min-width: 768px) {
+  .imageWrapper {
+    height: 600px;
+  }
+}
