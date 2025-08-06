@@ -2,6 +2,7 @@
 import { useEffect, useState } from 'react';
 import Swal from 'sweetalert2'
 import { useParams, useRouter } from 'next/navigation'
+import './edit.css';
 export default function Page() {
   const router = useRouter()
   const params = useParams();
@@ -85,6 +86,7 @@ export default function Page() {
   }
   }
   return (
+    <div className="container">
     <div className="max-w-md mx-auto mt-10 p-4 border rounded">
       <h1 className="text-xl font-bold mb-4">แก้ไขข้อมูลสมัครสมาชิก {id}</h1>
       {items.map((item) => (
@@ -137,5 +139,6 @@ export default function Page() {
       </form>
        ))} //ปิด items.map
     </div>
+  </div>
   )
 }
