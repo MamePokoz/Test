@@ -1,4 +1,5 @@
 import styles from './about.module.css';
+import './global.css';
 
 export default function About() {
   return (

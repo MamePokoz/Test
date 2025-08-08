@@ -2,6 +2,7 @@
 import { useParams } from 'next/navigation';
 import Image from 'next/image';
 import './player.css';
+import './global.css';
 
 const players = {
   "lionel-messi": {

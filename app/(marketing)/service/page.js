@@ -1,6 +1,7 @@
 // app/service/page.js
 import "./service.css";
 import Image from "next/image";
+import "./global.css";
 
 const services = [
   {

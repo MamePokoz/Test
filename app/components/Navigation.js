@@ -75,6 +75,7 @@ export default function Navigation() {
             <li className="nav-item">
               <a className="nav-link barca-link" href="/login">Login</a>
             </li>
+              <a className="nav-link barca-link" href="/login">Logout</a>
           </ul>
 
           <div className="position-relative ms-auto barca-search-container">

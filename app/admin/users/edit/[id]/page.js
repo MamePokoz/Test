@@ -3,6 +3,7 @@ import { useEffect, useState } from 'react';
 import Swal from 'sweetalert2'
 import { useParams, useRouter } from 'next/navigation'
 import './edit.css';
+import './global.css';
 export default function Page() {
   const router = useRouter()
   const params = useParams();

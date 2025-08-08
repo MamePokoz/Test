@@ -2,7 +2,7 @@
 import Link from 'next/link'
 import { useEffect, useState } from 'react';
 import './users.css'; 
-
+import './global.css';
 
 export default function Page() {
   const [items, setItems] = useState([]);
