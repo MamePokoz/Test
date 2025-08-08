@@ -21,3 +21,63 @@ body {
   50% { background-position: 100% 50%; }
   100% { background-position: 0% 50%; }
 }
+
+.home-container {
+  padding: 1.5rem;
+  background-color: #f9fafb;
+  min-height: 100vh;
+  font-family: 'Segoe UI', sans-serif;
+}
+
+.profile-bar {
+  background-color: #ffffff;
+  border-radius: 12px;
+  padding: 1rem 1.5rem;
+  margin-bottom: 1.5rem;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.06);
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.profile-info {
+  display: flex;
+  align-items: center;
+  gap: 1rem;
+}
+
+.avatar {
+  width: 48px;
+  height: 48px;
+  border-radius: 50%;
+  border: 2px solid #ddd;
+  object-fit: cover;
+}
+
+.welcome-text {
+  font-size: 1.1rem;
+  font-weight: 600;
+  margin: 0;
+  color: #333;
+}
+
+.email-text {
+  font-size: 0.9rem;
+  color: #666;
+  margin: 0;
+}
+
+.logout-button {
+  background-color: #f44336;
+  color: white;
+  border: none;
+  padding: 0.5rem 1rem;
+  border-radius: 8px;
+  cursor: pointer;
+  transition: background-color 0.2s ease;
+}
+
+.logout-button:hover {
+  background-color: #d32f2f;
+}
+

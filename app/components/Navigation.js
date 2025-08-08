@@ -1,20 +1,47 @@
 'use client';
+
 import { useState, useEffect } from 'react';
-import './Navigation.css'; //
+import { useRouter } from 'next/navigation';
+import './Navigation.css';
 
 export default function Navigation() {
+  const router = useRouter();
   const [isMounted, setIsMounted] = useState(false);
   const [searchTerm, setSearchTerm] = useState('');
   const [results, setResults] = useState([]);
   const [isDropdownOpen, setDropdownOpen] = useState(false);
   const [isNavCollapsed, setNavCollapsed] = useState(true);
+  const [isLoggedIn, setIsLoggedIn] = useState(false);
+  const [isAdmin, setIsAdmin] = useState(false);
 
   useEffect(() => {
     setIsMounted(true);
+    const token = localStorage.getItem('token');
+    setIsLoggedIn(!!token);
+
+    const userString = localStorage.getItem('user');
+    if (userString) {
+      try {
+        const user = JSON.parse(userString);
+        setIsAdmin(user.role === 'admin');
+      } catch {
+        setIsAdmin(false);
+      }
+    } else {
+      setIsAdmin(false);
+    }
   }, []);
 
+  const handleLogout = () => {
+    localStorage.removeItem('token');
+    localStorage.removeItem('user');
+    setIsLoggedIn(false);
+    setIsAdmin(false);
+    router.push('/login');
+  };
+
   const items = [
-    'Home', 'About', 'Service', 'Contact', 'Login', 'register',
+    'Home', 'About', 'Service', 'Contact', 'Login', 'Register',
     'Lionel Messi', 'Andres Iniesta', 'Xavi Hernandez',
     'Luis Suarez', 'Sergio Busquets', 'Jordi Alba', 'Gerard Pique',
     'Carles Puyol', 'Dani Alves', 'Marc-Andre ter Stegen', 'Neymar Jr'
@@ -68,14 +95,32 @@ export default function Navigation() {
                 <li><a className="dropdown-item" href="/service">Service</a></li>
                 <li><a className="dropdown-item" href="/contact">Contact</a></li>
                 <li><hr className="dropdown-divider" /></li>
-                <li><a className="dropdown-item" href="/admin/users">Admin</a></li>
-              </ul>
+                </ul>
             </li>
-
-            <li className="nav-item">
-              <a className="nav-link barca-link" href="/login">Login</a>
-            </li>
-              <a className="nav-link barca-link" href="/login">Logout</a>
+            {isAdmin && (
+                  <li><a className="nav-link barca-link" href="/admin/users">Admin</a></li>
+                )}
+            {!isLoggedIn ? (
+              <>
+              
+                <li className="nav-item">
+                  <a className="nav-link barca-link" href="/login">Login</a>
+                </li>
+                <li className="nav-item">
+                  <a className="nav-link barca-link" href="/register">Register</a>
+                </li>
+              </>
+            ) : (
+                <li className="nav-item">
+                <button
+                  className="nav-link barca-link btn btn-link"
+                  onClick={handleLogout}
+                  type="button"
+                >
+                  Logout
+                </button>
+              </li>
+            )}
           </ul>
 
           <div className="position-relative ms-auto barca-search-container">
