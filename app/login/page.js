@@ -62,14 +62,14 @@ try {
         title: 'กรุณากรอกอีเมลและรหัสผ่าน',
       });
     }
-  } catch (error) {
-    Swal.fire({
-      icon: 'error',
-      title: 'ข้อผิดพลาดเครือข่าย',
-      text: 'ไม่สามารถเชื่อมต่อเซิร์ฟเวอร์ได้',
-    });
-  }
-};
+    } catch (error) {
+        Swal.fire({
+          icon: 'error',
+          title: 'ข้อผิดพลาดเครือข่าย',
+          text: 'ไม่สามารถเชื่อมต่อเซิร์ฟเวอร์ได้',
+        });
+      }
+    };
 
   return (
     <div className="login-page">

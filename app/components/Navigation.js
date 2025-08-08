@@ -14,6 +14,7 @@ export default function Navigation() {
   const [isLoggedIn, setIsLoggedIn] = useState(false);
   const [isAdmin, setIsAdmin] = useState(false);
 
+
   useEffect(() => {
     setIsMounted(true);
     const token = localStorage.getItem('token');
@@ -41,7 +42,7 @@ export default function Navigation() {
   };
 
   const items = [
-    'Home', 'About', 'Service', 'Contact', 'Login', 'Register',
+    'About', 'Service', 'Contact', 'Login', 'Register',
     'Lionel Messi', 'Andres Iniesta', 'Xavi Hernandez',
     'Luis Suarez', 'Sergio Busquets', 'Jordi Alba', 'Gerard Pique',
     'Carles Puyol', 'Dani Alves', 'Marc-Andre ter Stegen', 'Neymar Jr'
@@ -135,7 +136,7 @@ export default function Navigation() {
               <ul className="list-group position-absolute mt-1 w-100 z-3 barca-search-dropdown">
                 {results.length > 0 ? (
                   results.map((item, index) => {
-                    const isPlayer = !['home', 'about', 'service', 'contact', 'register', 'login'].includes(item.toLowerCase());
+                    const isPlayer = !['about', 'service', 'contact', 'register', 'login'].includes(item.toLowerCase());
                     const link = isPlayer
                       ? `/player/${item.toLowerCase().replace(/\s+/g, '-')}`
                       : `/${item.toLowerCase()}`;
