@@ -14,8 +14,21 @@ export default function Login() {
   const handleSubmit = (e) => {
     e.preventDefault();
 
+
+  const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+  if (!emailRegex.test(email)) {
+    Swal.fire({
+      title: "Email ไม่ถูกต้อง",
+      text: "กรุณาใส่อีเมลให้ถูกต้อง เช่น example@email.com",
+      icon: "error",
+      width: 600,
+      padding: "3em",
+    });
+    return;
+  }
+
       const adminUser = {
-        email: 'admin@f',
+        email: 'admin@hotmail.com',
         password: 'admin123',
         fullname: 'Admin',
         role: 'admin',
