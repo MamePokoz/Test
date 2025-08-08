@@ -28,7 +28,7 @@ export default function Login() {
   }
 
       const adminUser = {
-        email: 'admin@hotmail.com',
+        email: 'admin@admin.com',
         password: 'admin123',
         fullname: 'Admin',
         role: 'admin',
