@@ -1,5 +1,7 @@
 .wrapper {
-  background: linear-gradient(to bottom right, #0f0c29, #302b63, #24243e);
+  background: linear-gradient(120deg, #0f0c29, #302b63, #24243e);
+  background-size: 300% 300%;
+  animation: gradientShift 15s ease infinite;
   min-height: 100vh;
   display: flex;
   justify-content: center;
@@ -7,27 +9,13 @@
   padding: 2rem;
   position: relative;
   overflow: hidden;
+  will-change: background-position;
 }
 
-.wrapper::before {
-  content: "";
-  position: absolute;
-  top: -50%;
-  left: -50%;
-  width: 200%;
-  height: 200%;
-  background: radial-gradient(circle, rgba(255, 255, 255, 0.03), transparent);
-  animation: rotateBg 30s linear infinite;
-  z-index: 0;
-}
-
-@keyframes rotateBg {
-  from {
-    transform: rotate(0deg);
-  }
-  to {
-    transform: rotate(360deg);
-  }
+@keyframes gradientShift {
+  0% { background-position: 0% 50%; }
+  50% { background-position: 100% 50%; }
+  100% { background-position: 0% 50%; }
 }
 
 .glassCard {
@@ -42,19 +30,37 @@
   color: #fff;
   box-shadow: 0 12px 40px rgba(0, 0, 0, 0.25);
   border: 1px solid rgba(255, 255, 255, 0.12);
-  transition: transform 0.3s ease;
+  transform: translate3d(0,0,0);
+  will-change: transform, box-shadow;
+  transition: transform 0.3s ease, box-shadow 0.3s ease;
+  animation: fadeIn 1.2s ease forwards;
 }
 
 .glassCard:hover {
-  transform: translateY(-5px);
+  transform: translate3d(0, -5px, 0) scale(1.01);
+  box-shadow: 0 16px 50px rgba(0, 255, 255, 0.3);
+}
+
+@keyframes fadeIn {
+  from { opacity: 0; transform: translate3d(0,40px,0); }
+  to { opacity: 1; transform: translate3d(0,0,0); }
 }
 
 .title {
   font-size: 3.2rem;
   font-weight: 800;
   text-align: center;
-  background: linear-gradient(to right, #ff6ec4, #7873f5);
-  margin-bottom: 1rem;
+  background: linear-gradient(270deg, #ff6ec4, #7873f5, #00e1ff, #ff6ec4);
+  background-size: 800% 800%;
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  animation: gradientFlow 8s ease infinite;
+}
+
+@keyframes gradientFlow {
+  0% { background-position: 0% 50%; }
+  50% { background-position: 100% 50%; }
+  100% { background-position: 0% 50%; }
 }
 
 .subtitle {
@@ -63,16 +69,38 @@
   margin-bottom: 2.2rem;
   font-size: 1.25rem;
   line-height: 1.8;
+  opacity: 0;
+  animation: fadeUp 1s ease forwards 0.4s;
+}
+
+@keyframes fadeUp {
+  to { opacity: 1; transform: translate3d(0,0,0); }
 }
 
 .section {
   margin-bottom: 2.5rem;
+  opacity: 0;
+  transform: translate3d(0,30px,0);
+  animation: fadeUp 1s ease forwards;
 }
+
+.section:nth-of-type(1) { animation-delay: 0.6s; }
+.section:nth-of-type(2) { animation-delay: 0.8s; }
+.section:nth-of-type(3) { animation-delay: 1s; }
+.section:nth-of-type(4) { animation-delay: 1.2s; }
+.section:nth-of-type(5) { animation-delay: 1.4s; }
+.section:nth-of-type(6) { animation-delay: 1.6s; }
 
 .section h2 {
   font-size: 1.6rem;
   color: #ffd369;
   margin-bottom: 0.6rem;
+  transition: color 0.3s ease, text-shadow 0.3s ease;
+}
+
+.section h2:hover {
+  color: #fff;
+  text-shadow: 0 0 10px #ffd369, 0 0 20px #ffd369;
 }
 
 .section p {
@@ -88,6 +116,7 @@
 .list li {
   margin-bottom: 0.6rem;
   font-size: 1.05rem;
+  transition: transform 0.3s ease, color 0.3s ease;
 }
 
 .list li::before {
@@ -96,20 +125,14 @@
   color: #6ec1e4;
 }
 
+.list li:hover {
+  transform: translateX(6px);
+  color: #6ec1e4;
+}
+
 @media (max-width: 768px) {
-  .glassCard {
-    padding: 1.8rem 1.5rem;
-  }
-
-  .title {
-    font-size: 2.2rem;
-  }
-
-  .subtitle {
-    font-size: 1rem;
-  }
-
-  .section h2 {
-    font-size: 1.3rem;
-  }
+  .glassCard { padding: 1.8rem 1.5rem; }
+  .title { font-size: 2.2rem; }
+  .subtitle { font-size: 1rem; }
+  .section h2 { font-size: 1.3rem; }
 }

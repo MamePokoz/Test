@@ -1,3 +1,6 @@
+import React from 'react';
+import './BeautifulFootballCards.css'; 
+
 const midfielderCards = [
   {
     id: 1,
@@ -87,11 +90,13 @@ const GoalkeeperCards = [
   }
 ];
 
-export default function Card() {
+export default function BeautifulFootballCards() {
   return (
     <>
       <div className="container my-5">
-        <h3 className="mb-4">Forward</h3>
+        <div className="section-header">
+          <h3 className="section-title">Forward</h3>
+        </div>
         <div className="row">
           {forwardCards.map((card) => (
             <div className="col-md-4 mb-4" key={card.id}>
@@ -100,7 +105,7 @@ export default function Card() {
                 <div className="card-body">
                   <h5 className="card-title">{card.title}</h5>
                   <p className="card-text">{card.text}</p>
-                    <a href={`/player/${card.slug}`} className="btn btn-primary">Learn More</a>
+                  <a href={`/player/${card.slug}`} className="btn btn-primary">Learn More</a>
                 </div>
               </div>
             </div>
@@ -109,7 +114,9 @@ export default function Card() {
       </div>
 
       <div className="container my-5">
-        <h3 className="mb-4">Midfielder</h3>
+        <div className="section-header">
+          <h3 className="section-title">Midfielder</h3>
+        </div>
         <div className="row">
           {midfielderCards.map((card) => (
             <div className="col-md-4 mb-4" key={card.id}>
@@ -118,7 +125,7 @@ export default function Card() {
                 <div className="card-body">
                   <h5 className="card-title">{card.title}</h5>
                   <p className="card-text">{card.text}</p>
-                    <a href={`/player/${card.slug}`} className="btn btn-primary">Learn More</a>
+                  <a href={`/player/${card.slug}`} className="btn btn-primary">Learn More</a>
                 </div>
               </div>
             </div>
@@ -127,26 +134,29 @@ export default function Card() {
       </div>
 
       <div className="container my-5">
-        <h3 className="mb-4">Defender</h3>
-          <div className="row">
-            {DefenderCards.map((card) => (
+        <div className="section-header">
+          <h3 className="section-title">Defender</h3>
+        </div>
+        <div className="row">
+          {DefenderCards.map((card) => (
             <div className="col-md-3 mb-4" key={card.id}>
               <div className="card">
                 <img src={card.img} className="card-img-top" alt={card.title} />
-                  <div className="card-body">
-                    <h5 className="card-title">{card.title}</h5>
-                      <p className="card-text">{card.text}</p>
-                        <a href={`/player/${card.slug}`} className="btn btn-primary">Learn More</a>
-                    </div>
+                <div className="card-body">
+                  <h5 className="card-title">{card.title}</h5>
+                  <p className="card-text">{card.text}</p>
+                  <a href={`/player/${card.slug}`} className="btn btn-primary">Learn More</a>
                 </div>
               </div>
-              ))}
             </div>
+          ))}
         </div>
-
+      </div>
 
       <div className="container my-5">
-        <h3 className="mb-4">Goalkeeper</h3>
+        <div className="section-header">
+          <h3 className="section-title">Goalkeeper</h3>
+        </div>
         <div className="row">
           {GoalkeeperCards.map((card) => (
             <div className="col-md-3 mb-4" key={card.id}>
@@ -155,7 +165,7 @@ export default function Card() {
                 <div className="card-body">
                   <h5 className="card-title">{card.title}</h5>
                   <p className="card-text">{card.text}</p>
-                    <a href={`/player/${card.slug}`} className="btn btn-primary">Learn More</a>
+                  <a href={`/player/${card.slug}`} className="btn btn-primary">Learn More</a>
                 </div>
               </div>
             </div>
@@ -163,7 +173,5 @@ export default function Card() {
         </div>
       </div>
     </>
-
-    
   );
 }

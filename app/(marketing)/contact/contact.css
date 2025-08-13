@@ -1,0 +1,138 @@
+.contact-page {
+  min-height: 100vh;
+  background: linear-gradient(135deg, #1f0036, #001a3a, #14003a);
+  padding: 50px 15px;
+}
+
+.contact-container {
+  max-width: 800px;
+  margin: auto;
+  position: relative;
+  z-index: 1;
+}
+
+.contact-header {
+  text-align: center;
+  margin-bottom: 40px;
+}
+
+.contact-header h1 {
+  font-size: 48px;
+  font-weight: bold;
+  color: white;
+}
+
+.header-line {
+  width: 80px;
+  height: 3px;
+  background: linear-gradient(to right, #ff5cb8, #7b2ff7);
+  margin: 10px auto;
+}
+
+.contact-header p {
+  color: #ccc;
+  font-size: 18px;
+}
+
+.contact-form-box {
+  background: rgba(255, 255, 255, 0.1);
+  padding: 40px;
+  border: 1px solid rgba(255, 255, 255, 0.2);
+  backdrop-filter: blur(10px);
+}
+
+.contact-form-box form {
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+}
+
+.contact-form-box label {
+  color: #ccc;
+  font-weight: bold;
+  font-size: 14px;
+}
+
+.contact-form-box input,
+.contact-form-box textarea {
+  background: rgba(255, 255, 255, 0.05);
+  border: 1px solid rgba(255, 255, 255, 0.3);
+  padding: 12px;
+  color: white;
+  font-size: 16px;
+  outline: none;
+  border-radius: 0;
+}
+
+.contact-form-box input:focus,
+.contact-form-box textarea:focus {
+  border-color: #ff5cb8;
+  background: rgba(255, 255, 255, 0.08);
+}
+
+.contact-form-box button {
+  background: linear-gradient(to right, #ff5cb8, #7b2ff7);
+  border: none;
+  color: white;
+  font-weight: bold;
+  padding: 15px;
+  cursor: pointer;
+  transition: 0.3s;
+  border-radius: 0;
+}
+
+.contact-form-box button:hover {
+  transform: scale(1.02);
+  background: linear-gradient(to right, #ff4aa8, #6920d6);
+}
+
+.form-success {
+  text-align: center;
+  color: white;
+}
+
+.success-icon {
+  width: 70px;
+  height: 70px;
+  background: linear-gradient(135deg, #00c853, #00e676);
+  margin: auto;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border-radius: 50%;
+  box-shadow: 0 0 15px rgba(0, 230, 118, 0.7), 0 0 30px rgba(0, 230, 118, 0.4);
+  animation: pop-in 0.5s ease-out;
+}
+
+.success-icon svg {
+  width: 32px;
+  height: 32px;
+  stroke: white;
+  stroke-width: 2.5;
+  fill: none;
+  stroke-dasharray: 48;
+  stroke-dashoffset: 48;
+  animation: draw-check 0.8s ease forwards 0.3s;
+}
+
+/* Icon pop animation */
+@keyframes pop-in {
+  0% {
+    transform: scale(0.3);
+    opacity: 0;
+  }
+  70% {
+    transform: scale(1.2);
+    opacity: 1;
+  }
+  100% {
+    transform: scale(1);
+  }
+}
+
+/* Draw check mark animation */
+@keyframes draw-check {
+  to {
+    stroke-dashoffset: 0;
+  }
+}

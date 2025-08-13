@@ -106,3 +106,21 @@
     font-size: 13px;
   }
 }
+/* ทำให้ตารางเลื่อนในแนวนอนถ้าจอกว้างไม่พอ */
+.table-wrapper {
+  overflow-x: auto;
+}
+
+/* ป้องกันไม่ให้ตารางบีบจนอ่านไม่ออก */
+.table th,
+.table td {
+  white-space: nowrap;
+}
+
+/* ให้ข้อความยาว ๆ (เช่น password hash) ตัดเป็นจุดไข่ปลา */
+.table td {
+  max-width: 200px;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+

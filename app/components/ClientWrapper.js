@@ -11,7 +11,7 @@ export default function ClientWrapper({ children }) {
   const hideNavFooter = pathname === '/login' || pathname === '/register' 
 
   const hideCard = pathname === '/contact' || pathname === '/service' || pathname === '/about' || pathname === '/register' 
-  || pathname === '/login'|| pathname.startsWith('/player/') || pathname === '/admin/users'
+  || pathname === '/login'|| pathname.startsWith('/player/') || pathname === '/admin/users' || pathname.startsWith('/admin/users/edit/')
 
 
   const HideNav = pathname  === '/about'
