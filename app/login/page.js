@@ -52,6 +52,45 @@ export default function Login() {
         });
         return;
       }
+    // ✅ ข้อมูลผู้ใช้ Local (จำลอง DB)
+    const localUsers = [
+      {
+        username: 'Fang',
+        password: '123456',
+        fullname: 'Supalerk Audomkasop',
+        role: 'student',
+      },
+      {
+        username: 'Teacher',
+        password: '123',
+        fullname: 'อาจารย์',
+        role: 'teacher',
+      },
+    ];
+          const foundUser = localUsers.find(
+        (u) => u.username === username && u.password === password
+      );
+      
+        if (foundUser) {
+      localStorage.setItem('token', 'dummy-token');
+      localStorage.setItem(
+        'user',
+        JSON.stringify({
+          username: foundUser.username,
+          fullname: foundUser.fullname,
+          role: foundUser.role,
+        })
+      );
+
+      Swal.fire({
+        icon: 'success',
+        title: 'เข้าสู่ระบบสำเร็จ',
+        text: `ยินดีต้อนรับ ${foundUser.fullname}`,
+      }).then(() => {
+        router.push('/');
+      });
+      return;
+    }
 
       // 🔹 ยิง API ไป Backend
       const res = await fetch('http://itdev.cmtc.ac.th:3000/api/auth/login', {

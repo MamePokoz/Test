@@ -99,7 +99,7 @@ export default function Navigation() {
                 </ul>
             </li>
             {isAdmin && (
-                  <li><a className="nav-link barca-link" href="/admin/users">Admin</a></li>
+                  <li><a className="nav-link barca-link" href="/adminlogin">Admin</a></li>
                 )}
             {!isLoggedIn ? (
               <>
