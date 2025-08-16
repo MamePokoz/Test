@@ -22,28 +22,6 @@ export default function AdminLoginPage() {
   const [lockTimeRemaining, setLockTimeRemaining] = useState(0);
   const [lastLogin, setLastLogin] = useState(null);
 
-  const PASSWORD_TIME_LIMIT = 20; // วินาที
-  const [timeLeft, setTimeLeft] = useState(PASSWORD_TIME_LIMIT);
-
-  useEffect(() => {
-    if (isLoading) return; // 👉 ถ้ากดเข้าสู่ระบบ ให้หยุดนับเวลา
-
-    if (timeLeft > 0) {
-        const timer = setInterval(() => setTimeLeft((prev) => prev - 1), 1000);
-        return () => clearInterval(timer);
-        } else {
-        setFormData({ username: "", password: "" });
-        generateCaptcha();
-            Swal.fire({
-            icon: "error",
-            title: "หมดเวลา",
-            text: "กรุณากรอกข้อมูลใหม่ภายในเวลาที่กำหนด",
-            confirmButtonColor: "#ef4444"
-        });
-            setTimeLeft(PASSWORD_TIME_LIMIT); // reset timer ใหม่
-        }
-    }, [timeLeft]);
-
   // เพิ่มใน AdminLoginPage ด้านบน
     useEffect(() => {
   // ❌ ปิดการคลิกขวา
@@ -188,9 +166,6 @@ export default function AdminLoginPage() {
           </div>
           <h1 className="mt-4 text-2xl font-bold">Admin Panel</h1>
           <p className="text-gray-600 text-black-500">ระบบจัดการหลังบ้าน</p>
-          <p className="text-sm text-black-500 text-center">
-            ⏳ เวลาที่เหลือในการใส่รหัสผ่าน: <span className="font-bold text-red-500">{timeLeft}s</span>
-        </p>
         </div>
 
         {/* แจ้งเตือน */}
