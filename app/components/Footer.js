@@ -3,6 +3,7 @@
 import dynamic from "next/dynamic";
 import { useEffect } from "react";
 import styles from "./Footer.module.css";
+import { useRouter } from "next/navigation";
 
 const BootstrapBundle = dynamic(
   () => import("bootstrap/dist/js/bootstrap.bundle.min.js"),
@@ -10,6 +11,7 @@ const BootstrapBundle = dynamic(
 );
 
 export default function Footer() {
+  const router = useRouter();
   useEffect(() => {
     BootstrapBundle;
   }, []);
@@ -20,31 +22,76 @@ export default function Footer() {
         <div className="row">
           {/* Branding & Main Nav */}
           <div className="col-md-4 mb-4 text-center text-md-start">
-            <h4 className={styles.title}>Supalerk Audomkasop</h4>
+            <div className={styles.brandSection}>
+              <h4 className={styles.brandTitle}>Supalerk Audomkasop</h4>
+              <p className={styles.brandTagline}>
+                Creating digital experiences
+              </p>
+            </div>
           </div>
 
           {/* Services or Extra Nav */}
           <div className="col-md-4 mb-4 text-center text-md-start">
-            <h5 className={styles.subTitle}>Explore</h5>
-            <div className={styles.nav}>
-              <a href="/" className={styles.navLink}>Home</a>
-              <a href="/about" className={styles.navLink}>About</a>
-              <a href="/contact" className={styles.navLink}>Contact</a>
-              <a href="/service" className={styles.navLink}>Services</a>
+            <div className={styles.navSection}>
+              <h5 className={styles.sectionTitle}>Explore</h5>
+              <nav className={styles.navList}>
+                <button
+                  className={styles.navLink}
+                  onClick={() => router.push("/")}
+                >
+                  <span className={styles.navIcon}>🏠</span>
+                  Home
+                </button>
+
+                <button
+                  className={styles.navLink}
+                  onClick={() => router.push("/about")}
+                >
+                  <span className={styles.navIcon}>👤</span>
+                  About
+                </button>
+
+                <button
+                  className={styles.navLink}
+                  onClick={() => router.push("/contact")}
+                >
+                  <span className={styles.navIcon}>📧</span>
+                  Contact
+                </button>
+
+                <button
+                  className={styles.navLink}
+                  onClick={() => router.push("/service")}
+                >
+                  <span className={styles.navIcon}>⚡</span>
+                  Services
+                </button>
+              </nav>
             </div>
           </div>
 
           {/* Contact */}
           <div className="col-md-4 text-center text-md-start">
-            <h5 className={styles.subTitle}>Contact</h5>
-            <p className={styles.contactItem}>📍 Chiang Mai, Thailand</p>
-            <p className={styles.contactItem}>📞 012-345-6789</p>
-            <p className={styles.contactItem}>✉️ test@email.com</p>
+            <div className={styles.contactSection}>
+              <h5 className={styles.sectionTitle}>Get in Touch</h5>
+              <div className={styles.contactList}>
+                <div className={styles.contactItem}>
+                  <span className={styles.contactIcon}>📍</span>
+                  <span className={styles.contactText}>
+                    Chiang Mai, Thailand
+                  </span>
+                </div>
+                <div className={styles.contactItem}>
+                  <span className={styles.contactIcon}>📞</span>
+                  <span className={styles.contactText}>012-345-6789</span>
+                </div>
+                <div className={styles.contactItem}>
+                  <span className={styles.contactIcon}>✉️</span>
+                  <span className={styles.contactText}>test@email.com</span>
+                </div>
+              </div>
+            </div>
           </div>
-        </div>
-
-        <div className="text-center mt-4">
-          <p className={styles.copy}>© 2025 All rights reserved.</p>
         </div>
       </div>
     </footer>

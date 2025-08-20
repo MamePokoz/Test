@@ -260,13 +260,13 @@
 }
 
 .genderBadge.male {
-  background: #e3f2fd;
-  color: #1976d2;
+  background: white;
+  color: blue;
 }
 
 .genderBadge.female {
-  background: #fce4ec;
-  color: #c2185b;
+  background: #ffffff;
+  color: blue;
 }
 
 .birthday {
@@ -383,12 +383,25 @@
     flex-direction: column;
   }
   
-  .btnEdit,
-  .btnDelete {
-    width: 35px;
-    height: 35px;
-  }
-}
+    .btnEdit {
+      background: "yellow";
+      border: "none";
+      border-radius: "50%";
+      width: "40px";
+      height: "40px";
+      cursor: "pointer";
+    }
+  
+    .btnDelete {
+      background: "red";
+      border: "none";
+      border-radius: "50%";
+      width: "40px";
+      height: "40px";
+      cursor: "pointer";
+      color: "white";
+    }
+    }
 
 @media (max-width: 480px) {
   .header {

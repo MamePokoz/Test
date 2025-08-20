@@ -158,7 +158,10 @@ export default function Navigation() {
               <li>
                 <span
                   className="nav-link barca-link"
-                  onClick={() => router.push('/adminlogin')}
+                  onClick={() => { 
+                  setDropdownOpen(false);
+                  router.push('/adminlogin');
+                }}
                   style={{ cursor: 'pointer' }}
                 >
                   Admin

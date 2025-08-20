@@ -12,6 +12,12 @@ export default function Page() {
   const router = useRouter();
 
   useEffect(() => {
+    const token = localStorage.getItem("token");
+    if (!token) {
+      router.push("/login");
+      return;
+    }
+
     async function getUsers() {
       try {
         setLoading(true);
@@ -117,7 +123,9 @@ export default function Page() {
               {
                 items.filter((item) => {
                   const sex = item.sex?.toLowerCase();
-                  return sex === "female" || sex === "หญิง" || sex === "ผู้หญิง";
+                  return (
+                    sex === "female" || sex === "หญิง" || sex === "ผู้หญิง"
+                  );
                 }).length
               }
             </div>
@@ -202,12 +210,15 @@ export default function Page() {
                         </td>
                         <td>
                           <div className={styles.nameCell}>
+                            <div className={styles.firstName}>
+                              {item.firstname}
+                            </div>
                             <div className={styles.fullName}>
                               {item.fullname ||
                                 `${item.firstname} ${item.lastname}`}
                             </div>
-                            <div className={styles.firstName}>
-                              {item.firstname}
+                            <div className={styles.lastname}>
+                              {item.lastname}
                             </div>
                           </div>
                         </td>
@@ -250,20 +261,18 @@ export default function Page() {
                               onClick={() =>
                                 router.push(`/admin/users/edit/${item.id}`)
                               }
-                              type="button"
                               title="Edit User"
                             >
-                              <i className="fas fa-edit"></i>
+                              ✏️
                             </button>
                             <button
                               className={styles.btnDelete}
-                              type="button"
                               onClick={() =>
                                 handleDelete(item.id, item.username)
                               }
                               title="Delete User"
                             >
-                              <i className="fas fa-trash"></i>
+                              🗑️
                             </button>
                           </div>
                         </td>
