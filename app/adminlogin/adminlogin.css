@@ -16,9 +16,17 @@ body {
 
 /* การเคลื่อนไหวของ gradient */
 @keyframes gradientMove {
-  0% { background-position: 0% 50%; }
-  50% { background-position: 100% 50%; }
-  100% { background-position: 0% 50%; }
+  0% {
+    background-position: 0% 50%;
+  }
+
+  50% {
+    background-position: 100% 50%;
+  }
+
+  100% {
+    background-position: 0% 50%;
+  }
 }
 
 /* กล่อง login หลัก */
@@ -71,7 +79,7 @@ body {
   border: none;
   border-radius: 12px;
   background: linear-gradient(135deg, #6366f1, #8b5cf6);
-  color: #fff;
+  color: #000000;
   font-size: 1rem;
   font-weight: bold;
   cursor: pointer;
@@ -133,8 +141,15 @@ body {
 
 /* fade in */
 @keyframes fadeIn {
-  from { opacity: 0; transform: translateY(-15px); }
-  to { opacity: 1; transform: translateY(0); }
+  from {
+    opacity: 0;
+    transform: translateY(-15px);
+  }
+
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
 }
 
 /* wrapper หลัก จัดให้อยู่ตรงกลาง */
@@ -178,7 +193,6 @@ body {
   color: #4f46e5;
 }
 
-
 /* ปุ่มรีเฟรช CAPTCHA */
 .captcha-refresh-btn {
   display: inline-flex;
@@ -212,8 +226,13 @@ body {
 }
 
 @keyframes spin {
-  from { transform: rotate(0deg); }
-  to { transform: rotate(360deg); }
+  from {
+    transform: rotate(0deg);
+  }
+
+  to {
+    transform: rotate(360deg);
+  }
 }
 
 .admin-login-card,
@@ -222,5 +241,6 @@ body {
 .admin-login-card span,
 .admin-login-card div,
 .admin-footer {
-  color: #1e293b; /* เทาเข้ม อ่านง่าย */
+  color: #1e293b;
+  /* เทาเข้ม อ่านง่าย */
 }

@@ -371,7 +371,7 @@ export default function AdminLoginPage() {
     // Enhanced validation with device fingerprint
     const validCredentials = { 
       username: 'admin', 
-      password: 'admin123' // รหัสผ่านที่แข็งแกร่งขึ้น
+      password: 'admin123!' // รหัสผ่านที่แข็งแกร่งขึ้น
     };
 
     const isValidUser = formData.username === validCredentials.username;
