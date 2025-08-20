@@ -4,6 +4,7 @@ import { useEffect, useState } from "react";
 import { useRouter } from "next/navigation";
 import styles from "./users.module.css";
 import "./global.css";
+import Swal from "sweetalert2";
 
 export default function Page() {
   const [items, setItems] = useState([]);
@@ -44,32 +45,54 @@ export default function Page() {
   }, []);
 
   const handleDelete = async (id, username) => {
-    if (!window.confirm(`Are you sure you want to delete user: ${username}?`)) {
-      return;
-    }
+    const result = await Swal.fire({
+      title: `คุณต้องการลบผู้ใช้ ${username} จริงหรือไม่?`,
+      text: "การลบจะไม่สามารถย้อนกลับได้!",
+      icon: "warning",
+      showCancelButton: true,
+      confirmButtonColor: "#d33",
+      cancelButtonColor: "#3085d6",
+      confirmButtonText: "ลบเลย",
+      cancelButtonText: "ยกเลิก",
+    });
+    if (result.isConfirmed) {
+      try {
+        const res = await fetch(
+          `https://backend-nextjs-virid.vercel.app/api/users/${id}`,
+          {
+            method: "DELETE",
+            headers: {
+              Accept: "application/json",
+            },
+          }
+        );
 
-    try {
-      const res = await fetch(
-        `https://backend-nextjs-virid.vercel.app/api/users/${id}`,
-        {
-          method: "DELETE",
-          headers: {
-            Accept: "application/json",
-          },
+        if (res.ok) {
+          const data = await res.json();
+
+          // อัปเดต state หลังลบ
+          setItems((prevItems) => prevItems.filter((item) => item.id !== id));
+
+          // แสดง SweetAlert success
+          Swal.fire({
+            title: "ลบเรียบร้อย!",
+            text: `ผู้ใช้ ${username} ถูกลบแล้ว`,
+            icon: "success",
+            showConfirmButton: false,
+          });
+        } else {
+          throw new Error("Failed to delete user");
         }
-      );
+      } catch (error) {
+        console.error("Error deleting data:", error);
 
-      if (res.ok) {
-        const result = await res.json();
-        console.log(result);
-        // รีเฟรชข้อมูลทันที
-        setItems(items.filter((item) => item.id !== id));
-      } else {
-        throw new Error("Failed to delete user");
+        Swal.fire({
+          title: "เกิดข้อผิดพลาด",
+          text: "ไม่สามารถลบผู้ใช้ได้ โปรดลองอีกครั้ง",
+          icon: "error",
+          confirmButtonColor: "#3085d6",
+        });
       }
-    } catch (error) {
-      console.error("Error deleting data:", error);
-      alert("Failed to delete user. Please try again.");
     }
   };
 
