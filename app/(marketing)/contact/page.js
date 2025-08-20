@@ -2,6 +2,7 @@
 import { useState } from 'react';
 import './contact.css';
 import './global.css';
+import Swal from 'sweetalert2';
 
 export default function Contact() {
   const [formData, setFormData] = useState({ name: '', email: '', message: '', Number: '' });
@@ -12,20 +13,48 @@ export default function Contact() {
     setFormData({...formData, [e.target.name]: e.target.value });
   };
 
-  const handleSubmit = async (e) => {
-    e.preventDefault();
-    setIsLoading(true);
-    
-    setTimeout(() => {
-      setSubmitted(true);
-      setIsLoading(false);
-    }, 1500);
-  };
-
   const resetForm = () => {
     setSubmitted(false);
     setFormData({ name: '', email: '', message: '', Number: '' });
   };
+
+  const handleChangeNumber = (e) => {
+  const value = e.target.value;
+  // เอาเฉพาะตัวเลข
+  const numericValue = value.replace(/\D/g, '');
+  setFormData({ ...formData, Number: numericValue });
+};
+const handleChangeEmail = (e) => {
+  const value = e.target.value;
+  setFormData({ ...formData, email: value });
+};
+
+const isValidEmail = (email) => {
+  return /^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email);
+};
+
+const handleSubmit = (e) => {
+  e.preventDefault();
+
+  // ตรวจสอบอีเมล
+  if (!isValidEmail(formData.email)) {
+    Swal.fire({
+      icon: 'error',
+      title: 'ผิดพลาด',
+      text: 'กรุณากรอกอีเมลที่ถูกต้อง',
+    });
+    return;
+  }
+
+  setIsLoading(true);
+
+  // จำลองส่งฟอร์ม
+  setTimeout(() => {
+    setSubmitted(true);
+    setIsLoading(false);
+    }, 1000);
+  }
+
 
   return (
     <div className="contact-page">
@@ -59,25 +88,25 @@ export default function Contact() {
                 required
                 placeholder="Enter your full name"
               />
-
+            
               <label>Email Address</label>
               <input 
                 type="email"
                 name="email"
                 value={formData.email}
-                onChange={handleChange}
+                onChange={handleChangeEmail}
                 required
                 placeholder="your.email@example.com"
               />
 
               <label>Phone Number</label>
-              <input 
-                type="tel"
-                name="Number"
-                value={formData.Number}
-                onChange={handleChange}
-                required
-                placeholder="+1 (555) 123-4567"
+              <input
+              type="tel"
+              name="Number"
+              value={formData.Number}
+              onChange={handleChangeNumber}
+              required
+              placeholder="5551234567"
               />
 
               <label>Message</label>
@@ -99,4 +128,4 @@ export default function Contact() {
       </div>
     </div>
   );
-}
+};

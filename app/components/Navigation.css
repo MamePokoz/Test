@@ -1,47 +1,344 @@
-/* Navigation.css */
+/* Navigation.css - Modern Barcelona Theme */
 
+/* Main Navbar Styling */
 .barca-navbar {
-  background: linear-gradient(to right, #004D98, #A50044);
-  color: #fff;
-  padding: 0.75rem 1rem;
-  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
-}
-
-.barca-brand {
-  font-weight: bold;
-  color: #ffcb05 !important;
-  font-size: 1.5rem;
-}
-
-.barca-link {
-  color: #ffffff !important;
-  font-weight: 500;
+  background: linear-gradient(135deg, #004d9f 0%, #a50044 50%, #004d9f 100%);
+  backdrop-filter: blur(10px);
+  box-shadow: 0 8px 32px rgba(0, 77, 159, 0.3);
+  border-bottom: 2px solid #fcb900;
+  position: sticky;
+  top: 0;
+  z-index: 1000;
   transition: all 0.3s ease;
 }
 
+.barca-navbar::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  height: 2px;
+  background: linear-gradient(90deg, #fcb900, #a50044, #fcb900);
+  animation: shimmer 2s ease-in-out infinite alternate;
+}
+
+@keyframes shimmer {
+  0% { opacity: 0.8; }
+  100% { opacity: 1; }
+}
+
+/* Brand Logo */
+.barca-brand {
+  font-size: 2rem !important;
+  font-weight: 800 !important;
+  background: linear-gradient(45deg, #fcb900, #ff6b6b, #fcb900);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+  position: relative;
+  transition: all 0.3s ease;
+  text-shadow: 0 0 20px rgba(252, 185, 0, 0.5);
+}
+
+.barca-brand::before {
+  content: '';
+  position: absolute;
+  left: -15px;
+  top: 50%;
+  transform: translateY(-50%);
+  width: 10px;
+  height: 10px;
+  border-radius: 50%;
+  background: linear-gradient(45deg, #fcb900, #a50044);
+  box-shadow: 0 0 10px rgba(252, 185, 0, 0.8);
+}
+
+.barca-brand:hover {
+  transform: scale(1.05);
+  filter: brightness(1.2);
+}
+
+/* Navigation Links */
+.barca-link {
+  color: #ffffff !important;
+  font-weight: 600 !important;
+  position: relative;
+  transition: all 0.3s ease;
+  padding: 0.75rem 1rem !important;
+  border-radius: 8px;
+  margin: 0 0.25rem;
+}
+
+.barca-link::before {
+  content: '';
+  position: absolute;
+  bottom: 0;
+  left: 50%;
+  width: 0;
+  height: 2px;
+  background: linear-gradient(90deg, #fcb900, #ff6b6b);
+  transform: translateX(-50%);
+  transition: width 0.3s ease;
+}
+
 .barca-link:hover {
-  color: #ffcb05 !important;
+  color: #fcb900 !important;
+  background: rgba(255, 255, 255, 0.1);
+  transform: translateY(-2px);
+  text-shadow: 0 0 10px rgba(252, 185, 0, 0.5);
 }
 
+.barca-link:hover::before {
+  width: 80%;
+}
+
+.barca-link.active {
+  color: #fcb900 !important;
+  background: rgba(252, 185, 0, 0.15);
+  border-radius: 8px;
+}
+
+/* Dropdown Menu */
 .barca-dropdown {
-  background-color: #ffffff;
-  border: none;
-  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
+  background: rgba(255, 255, 255, 0.95) !important;
+  backdrop-filter: blur(15px);
+  border: none !important;
+  border-radius: 12px !important;
+  box-shadow: 0 20px 40px rgba(0, 0, 0, 0.15) !important;
+  margin-top: 0.5rem !important;
+  overflow: hidden;
+  animation: dropdownSlide 0.3s ease;
 }
 
+@keyframes dropdownSlide {
+  from {
+    opacity: 0;
+    transform: translateY(-10px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+.barca-dropdown .dropdown-item {
+  color: #2c3e50 !important;
+  padding: 0.75rem 1.5rem !important;
+  transition: all 0.3s ease;
+  border-bottom: 1px solid rgba(0, 0, 0, 0.05);
+  font-weight: 500;
+}
+
+.barca-dropdown .dropdown-item:last-child {
+  border-bottom: none;
+}
+
+.barca-dropdown .dropdown-item:hover {
+  background: linear-gradient(135deg, #004d9f, #a50044) !important;
+  color: #ffffff !important;
+  transform: translateX(5px);
+  padding-left: 2rem !important;
+}
+
+.dropdown-divider {
+  border-color: rgba(165, 0, 68, 0.2) !important;
+  margin: 0 !important;
+}
+
+/* Search Container */
 .barca-search-container {
-  max-width: 250px;
+  max-width: 300px;
 }
 
 .barca-search {
-  border-radius: 20px;
-  padding: 0.5rem 1rem;
+  background: rgba(255, 255, 255, 0.15) !important;
+  border: 2px solid rgba(252, 185, 0, 0.3) !important;
+  border-radius: 25px !important;
+  color: #ffffff !important;
+  padding: 0.75rem 1.25rem !important;
+  transition: all 0.3s ease;
+  backdrop-filter: blur(10px);
 }
 
+.barca-search::placeholder {
+  color: rgba(255, 255, 255, 0.7) !important;
+}
+
+.barca-search:focus {
+  background: rgba(255, 255, 255, 0.25) !important;
+  border-color: #fcb900 !important;
+  box-shadow: 0 0 20px rgba(252, 185, 0, 0.3) !important;
+  outline: none !important;
+  transform: scale(1.02);
+}
+
+/* Search Dropdown */
 .barca-search-dropdown {
-  max-height: 250px;
-  overflow-y: auto;
-  background-color: #fff;
-  border: 1px solid #ccc;
-  border-radius: 0 0 10px 10px;
+  background: rgba(255, 255, 255, 0.98) !important;
+  backdrop-filter: blur(20px);
+  border: none !important;
+  border-radius: 12px !important;
+  box-shadow: 0 20px 40px rgba(0, 0, 0, 0.1) !important;
+  overflow: hidden;
+  animation: searchSlide 0.2s ease;
+}
+
+@keyframes searchSlide {
+  from {
+    opacity: 0;
+    transform: translateY(-5px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+.barca-search-dropdown .list-group-item {
+  background: transparent !important;
+  border: none !important;
+  border-bottom: 1px solid rgba(0, 0, 0, 0.05) !important;
+  color: #2c3e50 !important;
+  padding: 0.75rem 1.25rem !important;
+  transition: all 0.3s ease;
+  font-weight: 500;
+}
+
+.barca-search-dropdown .list-group-item:last-child {
+  border-bottom: none !important;
+}
+
+.barca-search-dropdown .list-group-item:hover {
+  background: linear-gradient(135deg, #004d9f, #a50044) !important;
+  color: #ffffff !important;
+  transform: translateX(5px);
+  padding-left: 1.75rem !important;
+}
+
+/* Mobile Toggle Button */
+.navbar-toggler {
+  border: 2px solid rgba(252, 185, 0, 0.5) !important;
+  border-radius: 8px !important;
+  padding: 0.5rem !important;
+  transition: all 0.3s ease;
+}
+
+.navbar-toggler:hover {
+  border-color: #fcb900 !important;
+  transform: scale(1.05);
+}
+
+.navbar-toggler-icon {
+  background-image: url("data:image/svg+xml,%3csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 30 30'%3e%3cpath stroke='rgba%28252, 185, 0, 0.8%29' stroke-linecap='round' stroke-miterlimit='10' stroke-width='2' d='m4 7h22M4 15h22M4 23h22'/%3e%3c/svg%3e") !important;
+}
+
+/* Button Styles */
+.btn.barca-link {
+  background: transparent !important;
+  border: 2px solid #fcb900 !important;
+  color: #ffffff !important;
+  font-weight: 600 !important;
+  border-radius: 25px !important;
+  padding: 0.5rem 1.5rem !important;
+  transition: all 0.3s ease;
+}
+
+.btn.barca-link:hover {
+  background: #fcb900 !important;
+  color: #004d9f !important;
+  transform: translateY(-2px);
+  box-shadow: 0 10px 20px rgba(252, 185, 0, 0.3) !important;
+}
+
+/* Container Fluid */
+.container-fluid {
+  padding-left: 2rem;
+  padding-right: 2rem;
+}
+
+/* Responsive Design */
+@media (max-width: 991.98px) {
+  .barca-navbar {
+    padding: 0.5rem 0;
+  }
+  
+  .navbar-collapse {
+    background: rgba(0, 77, 159, 0.98);
+    backdrop-filter: blur(15px);
+    margin-top: 1rem;
+    border-radius: 12px;
+    padding: 1rem;
+    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.2);
+  }
+  
+  .navbar-nav {
+    gap: 0.5rem;
+  }
+  
+  .barca-link {
+    border-radius: 8px !important;
+    margin: 0.25rem 0 !important;
+  }
+  
+  .barca-search-container {
+    margin-top: 1rem;
+    max-width: 100%;
+  }
+  
+  .container-fluid {
+    padding-left: 1rem;
+    padding-right: 1rem;
+  }
+}
+
+@media (max-width: 575.98px) {
+  .barca-brand {
+    font-size: 1.5rem !important;
+  }
+  
+  .barca-search {
+    font-size: 0.9rem !important;
+    padding: 0.6rem 1rem !important;
+  }
+}
+
+/* Loading Animation */
+@keyframes pulse {
+  0% { transform: scale(1); }
+  50% { transform: scale(1.05); }
+  100% { transform: scale(1); }
+}
+
+.barca-brand:hover {
+  animation: pulse 1s ease-in-out;
+}
+
+/* Accessibility */
+@media (prefers-reduced-motion: reduce) {
+  *, *::before, *::after {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+  }
+}
+
+/* Dark Mode Support */
+@media (prefers-color-scheme: dark) {
+  .barca-dropdown {
+    background: rgba(45, 55, 72, 0.95) !important;
+    color: #ffffff;
+  }
+  
+  .barca-dropdown .dropdown-item {
+    color: #e2e8f0 !important;
+  }
+  
+  .barca-search-dropdown {
+    background: rgba(45, 55, 72, 0.98) !important;
+  }
+  
+  .barca-search-dropdown .list-group-item {
+    color: #e2e8f0 !important;
+  }
 }

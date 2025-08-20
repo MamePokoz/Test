@@ -132,7 +132,7 @@ export default function AdminLoginPage() {
       localStorage.setItem('lastLoginTime', Date.now().toString());
       setLastLogin(new Date().toLocaleString('th-TH'));
       setSuccess('เข้าสู่ระบบสำเร็จ! กำลังเข้าสู่ระบบ...');
-      setTimeout(() => router.push('/admin/users'), 1500); // ✅ redirect ไปหน้า /admin
+      setTimeout(() => router.push('/admin/users')); // ✅ redirect ไปหน้า /admin
     } else {
       const newAttempts = loginAttempts + 1;
       setLoginAttempts(newAttempts);
@@ -165,7 +165,7 @@ export default function AdminLoginPage() {
             <Lock className="h-8 w-8 text-indigo-600" />
           </div>
           <h1 className="mt-4 text-2xl font-bold">Admin Panel</h1>
-          <p className="text-gray-600 text-black-500">ระบบจัดการหลังบ้าน</p>
+          <p className="text-black">ระบบจัดการหลังบ้าน</p>
         </div>
 
         {/* แจ้งเตือน */}
@@ -250,7 +250,7 @@ export default function AdminLoginPage() {
           </button>
         </form>
 
-        <p className="admin-footer">Last Login: {lastLogin || "ไม่เคยเข้าระบบ"}</p>
+        <p className="admin-footer text-black">Last Login: {lastLogin || "ไม่เคยเข้าระบบ"}</p>
       </div>
     </div>
   );

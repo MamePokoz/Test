@@ -1,6 +1,6 @@
 'use client';
 
-import { useState, useEffect } from 'react';
+import { useState, useEffect , useRef} from 'react';
 import { useRouter } from 'next/navigation';
 import './Navigation.css';
 
@@ -13,12 +13,18 @@ export default function Navigation() {
   const [isNavCollapsed, setNavCollapsed] = useState(true);
   const [isLoggedIn, setIsLoggedIn] = useState(false);
   const [isAdmin, setIsAdmin] = useState(false);
-
+  const dropdownRef = useRef(null);
 
   useEffect(() => {
     setIsMounted(true);
     const token = localStorage.getItem('token');
     setIsLoggedIn(!!token);
+
+    const handleClickOutside = (event) => {
+      if (dropdownRef.current && !dropdownRef.current.contains(event.target)) {
+        setDropdownOpen(false);
+      }
+    };
 
     const userString = localStorage.getItem('user');
     if (userString) {
@@ -62,7 +68,15 @@ export default function Navigation() {
   return (
     <nav className="navbar navbar-expand-lg barca-navbar">
       <div className="container-fluid">
-        <a className="navbar-brand barca-brand" href="/">Barcelona</a>
+        <span
+          className="navbar-brand barca-brand"
+          onClick={() => {
+          setDropdownOpen(false);
+          router.push('/');}}
+          style={{ cursor: 'pointer' }}
+        >
+          Barcelona
+        </span>
 
         <button
           className="navbar-toggler"
@@ -75,44 +89,106 @@ export default function Navigation() {
         <div className={`collapse navbar-collapse ${!isNavCollapsed ? 'show' : ''}`}>
           <ul className="navbar-nav me-auto mb-2 mb-lg-0">
             <li className="nav-item">
-              <a className="nav-link active barca-link" href="/">Home</a>
+              <span
+                className="nav-link active barca-link"
+                onClick={() => {
+                setDropdownOpen(false);   // 👈 ปิด dropdown
+                router.push('/');}}
+                style={{ cursor: 'pointer' }}
+              >
+                Home
+              </span>
             </li>
 
-            <li className="nav-item dropdown">
-              <a
+            <li className="nav-item dropdown" ref={dropdownRef}>
+              <span
                 className="nav-link dropdown-toggle barca-link"
-                href="#"
                 role="button"
                 aria-expanded={isDropdownOpen}
                 onClick={(e) => {
                   e.preventDefault();
                   setDropdownOpen(!isDropdownOpen);
                 }}
+                style={{ cursor: 'pointer' }}
               >
                 Menu
-              </a>
+              </span>
               <ul className={`dropdown-menu barca-dropdown${isDropdownOpen ? ' show' : ''}`}>
-                <li><a className="dropdown-item" href="/about">About</a></li>
-                <li><a className="dropdown-item" href="/service">Service</a></li>
-                <li><a className="dropdown-item" href="/contact">Contact</a></li>
+                <li>
+                  <span
+                  className="dropdown-item"
+                  onClick={() => {
+                  setDropdownOpen(false);   // 👈 ปิด dropdown
+                  router.push('/about');
+                  }}
+                  style={{ cursor: 'pointer' }}
+                  >
+                  About
+                  </span>
+                </li>
+
+                <li>
+                  <span 
+                  className="dropdown-item" 
+                  onClick={() => {         
+                  setDropdownOpen(false);
+                  router.push('/service');
+                }}
+                  style={{ cursor: 'pointer' }}>
+                    Service
+                  </span>
+                </li>
+
+                <li>
+                  <span 
+                  className="dropdown-item" 
+                  onClick={() => {
+                  setDropdownOpen(false);
+                  router.push('/contact');
+                } }
+                  style={{ cursor: 'pointer' }}>
+                    Contact
+                  </span>
+                </li>
                 <li><hr className="dropdown-divider" /></li>
-                </ul>
+              </ul>
             </li>
+
             {isAdmin && (
-                  <li><a className="nav-link barca-link" href="/adminlogin">Admin</a></li>
-                )}
+              <li>
+                <span
+                  className="nav-link barca-link"
+                  onClick={() => router.push('/adminlogin')}
+                  style={{ cursor: 'pointer' }}
+                >
+                  Admin
+                </span>
+              </li>
+            )}
+
             {!isLoggedIn ? (
               <>
-              
                 <li className="nav-item">
-                  <a className="nav-link barca-link" href="/login">Login</a>
+                  <span
+                    className="nav-link barca-link"
+                    onClick={() => router.push('/login')}
+                    style={{ cursor: 'pointer' }}
+                  >
+                    Login
+                  </span>
                 </li>
                 <li className="nav-item">
-                  <a className="nav-link barca-link" href="/register">Register</a>
+                  <span
+                    className="nav-link barca-link"
+                    onClick={() => router.push('/register')}
+                    style={{ cursor: 'pointer' }}
+                  >
+                    Register
+                  </span>
                 </li>
               </>
             ) : (
-                <li className="nav-item">
+              <li className="nav-item">
                 <button
                   className="nav-link barca-link btn btn-link"
                   onClick={handleLogout}
@@ -141,10 +217,13 @@ export default function Navigation() {
                       ? `/player/${item.toLowerCase().replace(/\s+/g, '-')}`
                       : `/${item.toLowerCase()}`;
                     return (
-                      <li key={index} className="list-group-item">
-                        <a href={link} className="text-decoration-none text-dark">
-                          {item}
-                        </a>
+                      <li
+                        key={index}
+                        className="list-group-item"
+                        onClick={() => router.push(link)}
+                        style={{ cursor: 'pointer' }}
+                      >
+                        {item}
                       </li>
                     );
                   })
@@ -159,3 +238,4 @@ export default function Navigation() {
     </nav>
   );
 }
+

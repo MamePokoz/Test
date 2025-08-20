@@ -1,79 +1,271 @@
+/* edit.module.css */
+
 .editPage {
-  display: flex;
-  justify-content: center;
-  align-items: center;
   min-height: 100vh;
-  background: linear-gradient(135deg, #2e026d, #15162c);
-  padding: 1rem;
+  background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+  padding: 2rem 1rem;
+  font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
 }
 
 .editContainer {
-  background: rgba(255, 255, 255, 0.08);
-  padding: 2rem;
-  border-radius: 1rem;
-  box-shadow: 0 8px 32px rgba(0, 0, 0, 0.3);
-  backdrop-filter: blur(16px);
-  width: 100%;
-  max-width: 450px;
-  animation: fadeInUp 0.6s ease forwards;
+  max-width: 800px;
+  margin: 0 auto;
 }
 
-.edittitle {
+.header {
   text-align: center;
-  color: #ffb6ff;
-  font-size: 1.5rem;
-  margin-bottom: 1.5rem;
-  font-weight: bold;
+  margin-bottom: 2rem;
+  color: white;
 }
 
-.editContainer form {
+.title {
+  font-size: 2.5rem;
+  font-weight: 700;
+  margin-bottom: 0.5rem;
+  text-shadow: 0 2px 4px rgba(0, 0, 0, 0.3);
+}
+
+.subtitle {
+  font-size: 1.1rem;
+  opacity: 0.9;
+  font-weight: 300;
+}
+
+.formWrapper {
+  background: white;
+  border-radius: 20px;
+  padding: 2.5rem;
+  box-shadow: 0 20px 40px rgba(0, 0, 0, 0.1);
+  backdrop-filter: blur(10px);
+}
+
+.form {
   display: grid;
+  gap: 1.5rem;
+}
+
+.formGroup {
+  display: flex;
+  flex-direction: column;
+  gap: 0.5rem;
+}
+
+.label {
+  font-weight: 600;
+  color: #374151;
+  font-size: 0.95rem;
+  margin-bottom: 0.25rem;
+}
+
+.input, .select, .textarea {
+  padding: 0.875rem 1rem;
+  border: 2px solid #e5e7eb;
+  border-radius: 12px;
+  font-size: 1rem;
+  transition: all 0.3s ease;
+  background-color: #fafafa;
+}
+
+.input:focus, .select:focus, .textarea:focus {
+  outline: none;
+  border-color: #667eea;
+  background-color: white;
+  box-shadow: 0 0 0 3px rgba(102, 126, 234, 0.1);
+  transform: translateY(-1px);
+}
+
+.input:hover, .select:hover, .textarea:hover {
+  border-color: #d1d5db;
+  background-color: white;
+}
+
+.textarea {
+  resize: vertical;
+  min-height: 80px;
+  font-family: inherit;
+}
+
+.select {
+  cursor: pointer;
+}
+
+.select option {
+  padding: 0.5rem;
+}
+
+.buttonGroup {
+  display: flex;
+  gap: 1rem;
+  margin-top: 2rem;
+  flex-wrap: wrap;
+}
+
+.button {
+  flex: 1;
+  padding: 0.875rem 2rem;
+  border: none;
+  border-radius: 12px;
+  font-size: 1rem;
+  font-weight: 600;
+  cursor: pointer;
+  transition: all 0.3s ease;
+  min-width: 120px;
+  text-transform: uppercase;
+  letter-spacing: 0.5px;
+}
+
+.submitButton {
+  background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+  color: white;
+}
+
+.submitButton:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 10px 25px rgba(102, 126, 234, 0.3);
+}
+
+.submitButton:active {
+  transform: translateY(0);
+}
+
+.cancelButton {
+  background: #f3f4f6;
+  color: #374151;
+  border: 2px solid #e5e7eb;
+}
+
+.cancelButton:hover {
+  background: #e5e7eb;
+  transform: translateY(-1px);
+}
+
+/* Loading State */
+.loadingContainer {
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+  color: white;
   gap: 1rem;
 }
 
-.editContainer select,
-.editContainer input {
-  padding: 0.7rem 0.9rem;
-  border: 1px solid rgba(255, 255, 255, 0.2);
-  border-radius: 0.5rem;
-  font-size: 1rem;
-  outline: none;
-  color: white;
-  background: rgba(255, 255, 255, 0.1);
-  transition: all 0.3s ease;
+.spinner {
+  width: 50px;
+  height: 50px;
+  border: 4px solid rgba(255, 255, 255, 0.3);
+  border-top: 4px solid white;
+  border-radius: 50%;
+  animation: spin 1s linear infinite;
 }
 
-.editContainer select:focus,
-.editContainer input:focus {
-  border-color: #ff80ff;
-  box-shadow: 0 0 0 3px rgba(255, 128, 255, 0.3);
-  transform: translateY(-2px);
+@keyframes spin {
+  0% { transform: rotate(0deg); }
+  100% { transform: rotate(360deg); }
 }
 
-.editContainer button {
-  background: linear-gradient(90deg, #ffb400, #ff7a00);
+/* Error State */
+.errorContainer {
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
   color: white;
-  font-weight: bold;
+  gap: 2rem;
+  text-align: center;
+}
+
+.errorContainer h2 {
+  font-size: 2rem;
+  font-weight: 600;
+}
+
+.backButton {
+  padding: 0.75rem 2rem;
+  background: white;
+  color: #667eea;
   border: none;
-  padding: 0.8rem;
-  border-radius: 0.5rem;
+  border-radius: 12px;
+  font-weight: 600;
   cursor: pointer;
   transition: all 0.3s ease;
 }
 
-.editContainer button:hover {
-  background: linear-gradient(90deg, #ff7a00, #ffb400);
+.backButton:hover {
   transform: translateY(-2px);
-  box-shadow: 0 4px 12px rgba(255, 123, 0, 0.4);
+  box-shadow: 0 10px 25px rgba(0, 0, 0, 0.1);
 }
 
-@keyframes fadeInUp {
-  from {
-    opacity: 0;
-    transform: translateY(20px);
+/* Responsive Design */
+@media (max-width: 768px) {
+  .editPage {
+    padding: 1rem 0.5rem;
   }
+  
+  .formWrapper {
+    padding: 1.5rem;
+    border-radius: 15px;
+  }
+  
+  .title {
+    font-size: 2rem;
+  }
+  
+  .buttonGroup {
+    flex-direction: column;
+  }
+  
+  .button {
+    min-width: auto;
+  }
+}
+
+@media (max-width: 480px) {
+  .formWrapper {
+    margin: 0 0.5rem;
+    padding: 1rem;
+  }
+  
+  .title {
+    font-size: 1.75rem;
+  }
+  
+  .input, .select, .textarea {
+    padding: 0.75rem;
+  }
+}
+
+/* Form animations */
+.formGroup {
+  animation: fadeInUp 0.5s ease forwards;
+  opacity: 0;
+  transform: translateY(20px);
+}
+
+.formGroup:nth-child(1) { animation-delay: 0.1s; }
+.formGroup:nth-child(2) { animation-delay: 0.2s; }
+.formGroup:nth-child(3) { animation-delay: 0.3s; }
+.formGroup:nth-child(4) { animation-delay: 0.4s; }
+.formGroup:nth-child(5) { animation-delay: 0.5s; }
+.formGroup:nth-child(6) { animation-delay: 0.6s; }
+.formGroup:nth-child(7) { animation-delay: 0.7s; }
+.formGroup:nth-child(8) { animation-delay: 0.8s; }
+
+@keyframes fadeInUp {
   to {
     opacity: 1;
     transform: translateY(0);
   }
+}
+
+/* Focus ring for accessibility */
+.input:focus-visible,
+.select:focus-visible,
+.textarea:focus-visible,
+.button:focus-visible {
+  outline: 2px solid #667eea;
+  outline-offset: 2px;
 }

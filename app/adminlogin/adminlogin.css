@@ -216,3 +216,11 @@ body {
   to { transform: rotate(360deg); }
 }
 
+.admin-login-card,
+.admin-login-card h1,
+.admin-login-card p,
+.admin-login-card span,
+.admin-login-card div,
+.admin-footer {
+  color: #1e293b; /* เทาเข้ม อ่านง่าย */
+}
