@@ -154,6 +154,18 @@ export default function Navigation() {
               </ul>
             </li>
 
+            <li className="nav-item">
+              <span
+                className="nav-link active barca-link"
+                onClick={() => {
+                setDropdownOpen(false);   // 👈 ปิด dropdown
+                router.push('/betball');}}
+                style={{ cursor: 'pointer' }}
+              >
+                Bet
+              </span>
+            </li>
+
             {isAdmin && (
               <li>
                 <span
