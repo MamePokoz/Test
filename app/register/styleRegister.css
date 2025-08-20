@@ -87,18 +87,19 @@ body {
   transform: translateY(-2px);
 }
 
-.login-link {
-  text-align: center;
+.login-text {
   font-size: 13px;
-  color: #555;
+  color: black; /* ตัวข้อความปกติ */
+  text-align: center;
 }
 
-.login-link a {
-  color: #ff4b2b;
-  text-decoration: none;
+.login-link {
+  color: #ff4b2b;  /* สีแดงส้ม */
   font-weight: bold;
+  cursor: pointer;
+  text-decoration: none;
 }
 
-.login-link a:hover {
-  text-decoration: underline;
+.login-link:hover {
+  color: darkblue;
 }

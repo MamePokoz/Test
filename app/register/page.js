@@ -41,7 +41,7 @@ export default function Register() {
     }
 
     try {
-      const res = await fetch('http://itdev.cmtc.ac.th:3000/api/users', {
+      const res = await fetch('https://backend-nextjs-virid.vercel.app/api/users', {
         method: 'POST',
         headers: {
           'Content-Type': 'application/json',
@@ -182,8 +182,11 @@ export default function Register() {
 
           <button type="submit">Register</button>
 
-          <p className="login-link">
-            Already have an account? <a href="/login">Login</a>
+          <p className="login-text">
+            Already have an account?{" "}
+            <a onClick={() => router.push("/login")} className="login-link">
+            Login
+            </a>
           </p>
         </form>
       </div>

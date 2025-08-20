@@ -87,21 +87,23 @@ body {
   transform: translateY(-2px);
 }
 
-.register-link {
-  text-align: center;
+.register-text {
   font-size: 13px;
-  color: #555;
+  color: black; /* ตัวข้อความปกติ */
+  text-align: center;
 }
 
-.register-link a {
-  color: #ff4b2b;
-  text-decoration: none;
+.register-link {
+  color: #ff4b2b;  /* สีแดงส้ม */
   font-weight: bold;
+  cursor: pointer;
+  text-decoration: none;
 }
 
-.register-link a:hover {
-  text-decoration: underline;
+.register-link:hover {
+  color: darkblue;
 }
+
 
 @media (max-width: 480px) {
   .login-container {

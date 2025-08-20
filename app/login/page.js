@@ -93,7 +93,7 @@ export default function Login() {
     }
 
       // 🔹 ยิง API ไป Backend
-      const res = await fetch('http://itdev.cmtc.ac.th:3000/api/auth/login', {
+      const res = await fetch('https://backend-nextjs-virid.vercel.app/api/auth/login', {
         method: 'POST',
         headers: {
           'Content-Type': 'application/json',
@@ -173,9 +173,12 @@ export default function Login() {
           </label>
 
           <button type="submit">Login</button>
-          <p className="register-link">
-            Don’t have an account? <a href="/register">Register</a>
-          </p>
+        <p className="register-text">
+            Don’t have an account?{" "}
+            <a onClick={() => router.push("/register")} className="register-link">
+              Register
+            </a>
+        </p>
         </form>
       </div>
     </div>
