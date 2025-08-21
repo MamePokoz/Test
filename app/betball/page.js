@@ -1,5 +1,6 @@
 'use client';
 import React, { useState, useEffect } from 'react';
+import { useRouter } from 'next/navigation';
 import Swal from "sweetalert2";
 import { Coins, Users, TrendingUp, Zap, Timer, Trophy, Target, DollarSign, Activity, Star } from 'lucide-react';
 
@@ -31,22 +32,67 @@ const FootballBettingSystem = () => {
   const [showResults, setShowResults] = useState(false);
   const [lastResults, setLastResults] = useState([]);
   const [totalProfit, setTotalProfit] = useState(0);
+  const [loading, setLoading] = useState(true); // สำหรับรอเช็ค login
+  const router = useRouter();
+
+  const generateMatches = () => {
+  let m = [];
+  for (let i = 0; i < 6; i++) {
+    const teamA = teams[Math.floor(Math.random() * teams.length)];
+    let teamB;
+    do { teamB = teams[Math.floor(Math.random() * teams.length)]; } while (teamA.name === teamB.name);
+
+    const homeWinOdds = (Math.random() * 2 + 1.5).toFixed(2);
+    const drawOdds = (Math.random() * 1.5 + 3).toFixed(2);
+    const awayWinOdds = (Math.random() * 2 + 1.5).toFixed(2);
+
+    m.push({
+      id: i + 1,
+      teamA,
+      teamB,
+      odds: { home: homeWinOdds, draw: drawOdds, away: awayWinOdds },
+      league: teamA.league,
+      kickoff: new Date(Date.now() + (i + 1) * 3600000).toLocaleTimeString('th-TH', { hour: '2-digit', minute: '2-digit' })
+    });
+  }
+  setMatches(m);
+};
+
+
+   const initNPCs = () => {
+    const npcPlayers = [
+      { name: 'BettingKing', balance: 15000, risk: 0.8, avatar: '👑', status: 'Pro' },
+      { name: 'LuckyStrike', balance: 8500, risk: 0.6, avatar: '🍀', status: 'Expert' },
+      { name: 'SafeBetter', balance: 12000, risk: 0.3, avatar: '🛡️', status: 'Conservative' },
+      { name: 'RiskTaker', balance: 3000, risk: 0.9, avatar: '🎯', status: 'Aggressive' },
+      { name: 'TheAnalyst', balance: 18000, risk: 0.5, avatar: '📊', status: 'Strategic' }
+    ];
+    setNpcs(npcPlayers);
+  };
 
   useEffect(() => {
-    initNPCs();
+        initNPCs();
     generateMatches();
+    const token = localStorage.getItem('token');
+    if (!token) {
+      router.push('/login');
+      return;
+    }
+    
+    // ถ้า login แล้ว โหลดข้อมูลอื่น ๆ
     
     const timer = setInterval(() => {
-      setTimeLeft(prev => {
-        if (prev <= 1) {
-          return 300;
-        }
-        return prev - 1;
-      });
+      setTimeLeft(prev => prev <= 1 ? 300 : prev - 1);
     }, 1000);
+
+    setLoading(false); // โหลดเสร็จ
 
     return () => clearInterval(timer);
   }, []);
+
+  if (loading) {
+    return <div className="text-center" style={{marginTop: '100px'}}><h1>Loading...</h1></div>;
+  }
 
   const formatTime = (seconds) => {
     const mins = Math.floor(seconds / 60);
@@ -70,49 +116,6 @@ const FootballBettingSystem = () => {
         handleSubmitBets(); // ✅ เรียกฟังก์ชันวางเดิมพัน
       }
     });
-  };
-
-  const initNPCs = () => {
-    const npcPlayers = [
-      { name: 'BettingKing', balance: 15000, risk: 0.8, avatar: '👑', status: 'Pro' },
-      { name: 'LuckyStrike', balance: 8500, risk: 0.6, avatar: '🍀', status: 'Expert' },
-      { name: 'SafeBetter', balance: 12000, risk: 0.3, avatar: '🛡️', status: 'Conservative' },
-      { name: 'RiskTaker', balance: 3000, risk: 0.9, avatar: '🎯', status: 'Aggressive' },
-      { name: 'TheAnalyst', balance: 18000, risk: 0.5, avatar: '📊', status: 'Strategic' }
-    ];
-    setNpcs(npcPlayers);
-  };
-
-  const generateMatches = () => {
-    let m = [];
-    for (let i = 0; i < 6; i++) {
-      const teamA = teams[Math.floor(Math.random() * teams.length)];
-      let teamB;
-      do { 
-        teamB = teams[Math.floor(Math.random() * teams.length)] 
-      } while (teamA.name === teamB.name);
-      
-      const homeWinOdds = (Math.random() * 2 + 1.5).toFixed(2);
-      const drawOdds = (Math.random() * 1.5 + 3).toFixed(2);
-      const awayWinOdds = (Math.random() * 2 + 1.5).toFixed(2);
-      
-      m.push({ 
-        id: i + 1, 
-        teamA, 
-        teamB,
-        odds: {
-          home: homeWinOdds,
-          draw: drawOdds,
-          away: awayWinOdds
-        },
-        league: teamA.league,
-        kickoff: new Date(Date.now() + (i + 1) * 3600000).toLocaleTimeString('th-TH', { 
-          hour: '2-digit', 
-          minute: '2-digit' 
-        })
-      });
-    }
-    setMatches(m);
   };
 
   const handleBetChange = (matchId, choice, amount) => {
@@ -443,6 +446,8 @@ const FootballBettingSystem = () => {
       boxShadow: '0 25px 50px rgba(0,0,0,0.5)',
       position: 'relative' // ✅ สำคัญเพื่อวางปุ่มปิด
     }}>
+
+      
       {/* ปุ่มปิด */}
       <button
         onClick={() => setShowResults(false)}
@@ -826,7 +831,7 @@ const FootballBettingSystem = () => {
                   {rh.timestamp?.toLocaleString('th-TH') || 'Recent'}
                 </div>
                 <div style={{ display: 'flex', flexDirection: 'column', gap: '8px' }}>
-                  {rh.roundResults.map((r, i) => (
+                  {(rh.roundResults || []).map((r, i) => (
                     <div key={i} style={{
                       display: 'flex',
                       justifyContent: 'space-between',
@@ -835,7 +840,7 @@ const FootballBettingSystem = () => {
                       fontSize: '0.95em'
                     }}>
                       <span>
-                        {r.match.teamA.name} vs {r.match.teamB.name}
+                      {r?.match?.teamA?.name || 'Unknown'} vs {r?.match?.teamB?.name || 'Unknown'}
                       </span>
                       <span style={{
                         background: 'rgba(102, 126, 234, 0.3)',
