@@ -38,9 +38,10 @@ const FootballBettingSystem = () => {
   const [currentTrack, setCurrentTrack] = useState(0); // index ของเพลงปัจจุบัน
 
   const playlist = [
-  { title: "ส่วนเกิน&เรื่องบนเตียง", src: "/music/boy.mp3" },
-  { title: "Please", src: "/music/please.mp3" },
-  { title: "เธอยัง", src: "/music/potato.mp3" }
+  { title: "Shakira - La La La (Brazil 2014)", src: "/music/lala.mp3" },
+  { title: "Ricky Martin - The Cup of Life", src: "/music/cup.mp3" },
+  { title: "K'NAAN - Wavin' Flag", src: "/music/flag.mp3" },
+  { title: "Shakira - Waka Waka", src: "/music/waka.mp3" }
 ];
 
 
