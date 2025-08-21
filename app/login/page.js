@@ -18,17 +18,32 @@ export default function Login() {
 
     // ✅ ข้อมูล Admin (local login)
     const adminUser = {
-      username: 'admin',
-      password: 'admin123',
-      fullname: 'Admin',
-      role: 'admin',
+      username: "admin",
+      password: "admin123",
+      fullname: "Admin",
+      role: "admin",
     };
+    // ✅ ข้อมูลผู้ใช้ Local (จำลอง DB)
+    const localUsers = [
+      {
+        username: "Fang",
+        password: "123456",
+        fullname: "Supalerk Audomkasop",
+        role: "student",
+      },
+      {
+        username: "Teacher",
+        password: "123",
+        fullname: "อาจารย์",
+        role: "teacher",
+      },
+    ];
 
     try {
       if (!username || !password) {
         Swal.fire({
-          icon: 'error',
-          title: 'กรุณากรอกชื่อผู้ใช้และรหัสผ่าน',
+          icon: "error",
+          title: "กรุณากรอกชื่อผู้ใช้และรหัสผ่าน",
         });
         setIsLoading(false);
         return;
@@ -36,9 +51,9 @@ export default function Login() {
 
       // 🔹 ถ้าเป็น Admin
       if (username === adminUser.username && password === adminUser.password) {
-        localStorage.setItem('token', 'dummy-token');
+        localStorage.setItem("token", "dummy-token");
         localStorage.setItem(
-          'user',
+          "user",
           JSON.stringify({
             username: adminUser.username,
             fullname: adminUser.fullname,
@@ -47,40 +62,24 @@ export default function Login() {
         );
 
         Swal.fire({
-          icon: 'success',
-          title: 'เข้าสู่ระบบสำเร็จ (Admin)',
+          icon: "success",
+          title: "เข้าสู่ระบบสำเร็จ (Admin)",
           text: `ยินดีต้อนรับ ${adminUser.fullname}`,
         }).then(() => {
-          router.push('/');
+          router.push("/");
         });
         setIsLoading(false);
         return;
       }
 
-      // ✅ ข้อมูลผู้ใช้ Local (จำลอง DB)
-      const localUsers = [
-        {
-          username: 'Fang',
-          password: '123456',
-          fullname: 'Supalerk Audomkasop',
-          role: 'student',
-        },
-        {
-          username: 'Teacher',
-          password: '123',
-          fullname: 'อาจารย์',
-          role: 'teacher',
-        },
-      ];
-
       const foundUser = localUsers.find(
         (u) => u.username === username && u.password === password
       );
-      
+
       if (foundUser) {
-        localStorage.setItem('token', 'dummy-token');
+        localStorage.setItem("token", "dummy-token");
         localStorage.setItem(
-          'user',
+          "user",
           JSON.stringify({
             username: foundUser.username,
             fullname: foundUser.fullname,
@@ -89,24 +88,27 @@ export default function Login() {
         );
 
         Swal.fire({
-          icon: 'success',
-          title: 'เข้าสู่ระบบสำเร็จ',
+          icon: "success",
+          title: "เข้าสู่ระบบสำเร็จ",
           text: `ยินดีต้อนรับ ${foundUser.fullname}`,
         }).then(() => {
-          router.push('/');
+          router.push("/");
         });
         setIsLoading(false);
         return;
       }
 
       // 🔹 ยิง API ไป Backend
-      const res = await fetch('https://backend-nextjs-virid.vercel.app/api/auth/login', {
-        method: 'POST',
-        headers: {
-          'Content-Type': 'application/json',
-        },
-        body: JSON.stringify({ username, password }),
-      });
+      const res = await fetch(
+        "https://backend-nextjs-virid.vercel.app/api/auth/login",
+        {
+          method: "POST",
+          headers: {
+            "Content-Type": "application/json",
+          },
+          body: JSON.stringify({ username, password }),
+        }
+      );
 
       let data;
       try {
@@ -117,33 +119,31 @@ export default function Login() {
 
       if (res.ok && data.token) {
         // เก็บ token และข้อมูล user
-        localStorage.setItem('token', data.token);
-        localStorage.setItem('user', JSON.stringify(data.user));
+        localStorage.setItem("token", data.token);
+        localStorage.setItem("user", JSON.stringify(data.user));
 
         Swal.fire({
-          icon: 'success',
-          title: 'เข้าสู่ระบบสำเร็จ',
+          icon: "success",
+          title: "เข้าสู่ระบบสำเร็จ",
           text: `ยินดีต้อนรับ ${data.user?.fullname || username}`,
         }).then(() => {
-          router.push('/');
+          router.push("/");
         });
       } else {
         // แสดง error จาก backend ถ้ามี
         Swal.fire({
-          icon: 'error',
-          title: 'เข้าสู่ระบบไม่สำเร็จ',
+          icon: "error",
+          title: "เข้าสู่ระบบไม่สำเร็จ",
           text:
-            data?.message ||
-            data?.error ||
-            'ชื่อผู้ใช้หรือรหัสผ่านไม่ถูกต้อง',
+            data?.message || data?.error || "ชื่อผู้ใช้หรือรหัสผ่านไม่ถูกต้อง",
         });
       }
     } catch (error) {
-      console.error('Login error:', error);
+      console.error("Login error:", error);
       Swal.fire({
-        icon: 'error',
-        title: 'ข้อผิดพลาดเครือข่าย',
-        text: 'ไม่สามารถเชื่อมต่อเซิร์ฟเวอร์ได้',
+        icon: "error",
+        title: "ข้อผิดพลาดเครือข่าย",
+        text: "ไม่สามารถเชื่อมต่อเซิร์ฟเวอร์ได้",
       });
     } finally {
       setIsLoading(false);
