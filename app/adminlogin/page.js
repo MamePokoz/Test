@@ -82,8 +82,7 @@ export default function AdminLoginPage() {
 
   // Enhanced security monitoring
   useEffect(() => {
-    // ป้องกัน DevTools แบบ Advanced
-    const handleContextMenu = (e) => {
+      const handleContextMenu = (e) => {
       e.preventDefault();
       logSuspiciousActivity('Right-click attempted');
     };
@@ -184,9 +183,10 @@ export default function AdminLoginPage() {
       fingerprint: deviceFingerprint,
       userAgent: navigator.userAgent
     };
-    
+
     console.warn('Suspicious Activity:', logEntry);
-    
+    setSuspiciousActivity(true);
+    setTimeout(() => setSuspiciousActivity(false), 5000);    
     // เก็บ log ใน sessionStorage
     const existingLogs = JSON.parse(sessionStorage.getItem('suspiciousLogs') || '[]');
     sessionStorage.setItem('suspiciousLogs', JSON.stringify([...existingLogs, logEntry]));
@@ -444,10 +444,10 @@ export default function AdminLoginPage() {
           <div className="bg-gradient-to-br from-indigo-500 to-purple-600 w-16 h-16 mx-auto rounded-full flex items-center justify-center shadow-lg">
             <Shield className="h-8 w-8 text-white" />
           </div>
-          <h1 className="mt-4 text-2xl font-bold bg-gradient-to-r from-indigo-600 to-purple-600 bg-clip-text text-transparent">
+          <h1 className="mt-4 text-white-600 font-bold bg-gradient-to-r from-indigo-600 to-purple-600 bg-clip-text text-transparent">
             Secure Admin Panel
           </h1>
-          <p className="text-gray-600">ระบบจัดการหลังบ้าน - Enhanced Security</p>
+          <p className="text-white-600">ระบบจัดการหลังบ้าน - Enhanced Security</p>
           
           {/* Security Status */}
           <div className="mt-3 flex justify-center items-center space-x-4 text-sm">

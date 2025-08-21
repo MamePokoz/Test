@@ -233,6 +233,13 @@
   font-family: monospace;
 }
 
+.lastname {
+  font-family: monospace;
+  color: #000000;
+  font-size: 1.2rem;
+  letter-spacing: 2px;
+}
+
 .password {
   font-family: monospace;
   color: #666;
