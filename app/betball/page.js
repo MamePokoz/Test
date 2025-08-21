@@ -590,7 +590,7 @@ useEffect(() => {
               justifyContent: "center",
               alignItems: "center",
               zIndex: 1000,
-              padding: "20px",
+              padding: "20px", 
             }}
           >
             <div
@@ -639,9 +639,11 @@ useEffect(() => {
                 <div
                   key={i}
                   style={{
-                    background: "#ffffffff",
+                    background: "#242222ff",
                     padding: "10px",
                     borderRadius: "10px",
+                    color: "white"
+
                   }}
                 >
                   <div style={{ fontWeight: "bold", marginBottom: "5px" }}>
