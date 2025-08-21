@@ -242,3 +242,87 @@
   animation: fadeInUp 0.6s ease forwards;
   animation-delay: 0.3s;
 }
+
+/* Responsive tweaks */
+
+/* Small devices (mobile) */
+@media (max-width: 575px) {
+  .footer {
+    padding: 30px 0 0;
+  }
+
+  .brandTitle {
+    font-size: 1.4rem;
+  }
+
+  .sectionTitle {
+    font-size: 1.1rem;
+    text-align: center;
+    padding-bottom: 5px;
+  }
+
+  .navList,
+  .contactList {
+    gap: 10px;
+  }
+
+  .navLink,
+  .contactItem {
+    padding: 6px 10px;
+    font-size: 0.9rem;
+  }
+
+  .footerBottom {
+    gap: 15px;
+    flex-direction: column;
+    text-align: center;
+  }
+}
+
+/* Medium devices (tablet) */
+@media (min-width: 576px) and (max-width: 991px) {
+  .container {
+    padding: 0 20px;
+  }
+
+  .brandTitle {
+    font-size: 1.6rem;
+  }
+
+  .sectionTitle {
+    font-size: 1.2rem;
+  }
+
+  .navLink,
+  .contactItem {
+    justify-content: center;
+    text-align: center;
+  }
+
+  .footerBottom {
+    flex-direction: column;
+    align-items: center;
+    gap: 18px;
+  }
+}
+
+/* Large devices (desktop) */
+@media (min-width: 992px) {
+  .navList {
+    flex-direction: row;
+    flex-wrap: wrap;
+    gap: 15px;
+  }
+
+  .contactList {
+    flex-direction: row;
+    flex-wrap: wrap;
+    gap: 15px;
+  }
+
+  .footerBottom {
+    flex-direction: row;
+    justify-content: space-between;
+    align-items: center;
+  }
+}
