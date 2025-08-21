@@ -395,9 +395,11 @@ useEffect(() => {
             }
           `}</style>
 
+          <div style={{ color: "white", marginTop: "5px" }}>
           <span>
             {formatTime(currentTime)} / {formatTime(duration)}
           </span>
+          </div>
         </div>
         <div style={{ color: "white", marginTop: "5px" }}>
           Now Playing: {playlist[currentTrack].title}
