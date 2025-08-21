@@ -14,31 +14,47 @@ export default function Navigation() {
   const [isLoggedIn, setIsLoggedIn] = useState(false);
   const [isAdmin, setIsAdmin] = useState(false);
   const dropdownRef = useRef(null);
+  const searchRef = useRef(null);
+  const [isSearchDropdownOpen, setSearchDropdownOpen] = useState(false);
 
-  useEffect(() => {
-    setIsMounted(true);
-    const token = localStorage.getItem('token');
-    setIsLoggedIn(!!token);
 
-    const handleClickOutside = (event) => {
-      if (dropdownRef.current && !dropdownRef.current.contains(event.target)) {
-        setDropdownOpen(false);
-      }
-    };
+useEffect(() => {
+  setIsMounted(true);
+  const token = localStorage.getItem('token');
+  setIsLoggedIn(!!token);
 
-    const userString = localStorage.getItem('user');
-    if (userString) {
-      try {
-        const user = JSON.parse(userString);
-        setIsAdmin(user.role === 'admin');
-      } catch {
-        setIsAdmin(false);
-      }
-    } else {
+  const handleClickOutside = (event) => {
+    if (
+      searchRef.current && 
+      !searchRef.current.contains(event.target) && 
+      dropdownRef.current && 
+      !dropdownRef.current.contains(event.target)
+    ) {
+      setDropdownOpen(false);
+      setSearchDropdownOpen(false);
+    }
+  };
+
+  document.addEventListener("mousedown", handleClickOutside);
+
+
+
+  const userString = localStorage.getItem('user');
+  if (userString) {
+    try {
+      const user = JSON.parse(userString);
+      setIsAdmin(user.role === 'admin');
+    } catch {
       setIsAdmin(false);
     }
-  }, []);
+  } else {
+    setIsAdmin(false);
+  }
 
+  return () => {
+    document.removeEventListener("mousedown", handleClickOutside);
+  };
+}, []);
   const handleLogout = () => {
     localStorage.removeItem('token');
     localStorage.removeItem('user');
@@ -48,7 +64,7 @@ export default function Navigation() {
   };
 
   const items = [
-    'About', 'Service', 'Contact', 'Login', 'Register',
+    'About', 'Service', 'Contact', 'Login', 'Register', 'Betball',
     'Lionel Messi', 'Andres Iniesta', 'Xavi Hernandez',
     'Luis Suarez', 'Sergio Busquets', 'Jordi Alba', 'Gerard Pique',
     'Carles Puyol', 'Dani Alves', 'Marc-Andre ter Stegen', 'Neymar Jr'
@@ -57,6 +73,7 @@ export default function Navigation() {
   const handleSearch = (e) => {
     const value = e.target.value;
     setSearchTerm(value);
+    setSearchDropdownOpen(!!value); // เปิด dropdown ถ้ามีข้อความ
     const filtered = items.filter((item) =>
       item.toLowerCase().includes(value.toLowerCase())
     );
@@ -215,7 +232,7 @@ export default function Navigation() {
             )}
           </ul>
 
-          <div className="position-relative ms-auto barca-search-container">
+          <div className="position-relative ms-auto barca-search-container" ref={searchRef} >
             <input
               className="form-control barca-search"
               type="search"
@@ -223,11 +240,11 @@ export default function Navigation() {
               value={searchTerm}
               onChange={handleSearch}
             />
-            {searchTerm && (
+            {isSearchDropdownOpen && searchTerm && (
               <ul className="list-group position-absolute mt-1 w-100 z-3 barca-search-dropdown">
                 {results.length > 0 ? (
                   results.map((item, index) => {
-                    const isPlayer = !['about', 'service', 'contact', 'register', 'login'].includes(item.toLowerCase());
+                    const isPlayer = !['about', 'service', 'contact', 'register', 'login' , 'betball'].includes(item.toLowerCase());
                     const link = isPlayer
                       ? `/player/${item.toLowerCase().replace(/\s+/g, '-')}`
                       : `/${item.toLowerCase()}`;
@@ -235,7 +252,11 @@ export default function Navigation() {
                       <li
                         key={index}
                         className="list-group-item"
-                        onClick={() => router.push(link)}
+                        onClick={() => {
+                          router.push(link)
+                          setDropdownOpen(false);
+                          setSearchDropdownOpen(false); // ปิด dropdown หลังเลือก
+                        }}
                         style={{ cursor: 'pointer' }}
                       >
                         {item}
