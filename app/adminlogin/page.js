@@ -6,6 +6,41 @@ import './adminlogin.css';
 import Swal from "sweetalert2";
 
 export default function AdminLoginPage() {
+  
+  useEffect(() => {
+    const token = localStorage.getItem("token");
+    if (!token) {
+      router.push("/login");
+      return;
+    }
+
+    async function getUsers() {
+      try {
+        setLoading(true);
+        const res = await fetch(
+          "https://backend-nextjs-virid.vercel.app/api/users"
+        );
+        if (!res.ok) {
+          throw new Error("Failed to fetch data");
+        }
+        const data = await res.json();
+        setItems(data);
+        setError(null);
+      } catch (error) {
+        console.error("Error fetching data:", error);
+        setError("Failed to load users data");
+      } finally {
+        setLoading(false);
+      }
+    }
+
+    getUsers();
+    const interval = setInterval(getUsers, 5000); // เพิ่มเป็น 5 วินาที
+    return () => clearInterval(interval);
+  }, []);
+  const [loading, setLoading] = useState(true);
+  const [items, setItems] = useState([]);
+
   const router = useRouter();
   const MAX_ATTEMPTS = 3; // ลดจาก 5 เหลือ 3
   const LOCKOUT_TIME = 900; // เพิ่มเป็น 15 นาที
@@ -34,7 +69,8 @@ export default function AdminLoginPage() {
   const [mouseMovements, setMouseMovements] = useState([]);
   const activityTimeoutRef = useRef(null);
   const sessionTimeoutRef = useRef(null);
-  
+
+
   // Password strength checker
   const checkPasswordStrength = (password) => {
     const hasLower = /[a-z]/.test(password);
