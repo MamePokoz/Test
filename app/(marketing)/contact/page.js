@@ -1,68 +1,81 @@
-'use client';
+'use client'
+
 import { useState } from 'react';
 import './contact.css';
-import './global.css';
-import Swal from 'sweetalert2';
+import Swal from "sweetalert2";
 
 export default function Contact() {
-  const [formData, setFormData] = useState({ name: '', email: '', message: '', Number: '' });
+  const [formData, setFormData] = useState({ 
+    name: '', 
+    email: '', 
+    message: '', 
+    number: '' 
+  });
   const [submitted, setSubmitted] = useState(false);
   const [isLoading, setIsLoading] = useState(false);
 
   const handleChange = (e) => {
-    setFormData({...formData, [e.target.name]: e.target.value });
+    setFormData({ ...formData, [e.target.name]: e.target.value });
   };
 
   const resetForm = () => {
     setSubmitted(false);
-    setFormData({ name: '', email: '', message: '', Number: '' });
+    setFormData({ name: '', email: '', message: '', number: '' });
   };
 
   const handleChangeNumber = (e) => {
-  const value = e.target.value;
-  // เอาเฉพาะตัวเลข
-  const numericValue = value.replace(/\D/g, '');
-  setFormData({ ...formData, Number: numericValue });
+    const value = e.target.value;
+    const numericValue = value.replace(/\D/g, '');
+    setFormData({ ...formData, number: numericValue });
+  };
+
+  const handleChangeEmail = (e) => {
+    const value = e.target.value;
+    setFormData({ ...formData, email: value });
+  };
+
+  const isValidEmail = (email) => {
+    return /^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email);
+  };
+
+  const handleSubmit = (e) => {
+    e.preventDefault();
+
+    if (!isValidEmail(formData.email)) {
+      Swal.fire({
+        icon: 'error',
+        title: 'Invalid Email',
+        text: 'Please enter a valid email address',
+      });
+      return;
+    }
+
+    if (formData.number.length < 10) {
+      Swal.fire({
+        icon: 'warning',
+        title: 'Invalid Phone Number',
+        text: 'Please enter a valid phone number with at least 10 digits',
+      });
+      return;
+    }
+
+    setIsLoading(true);
+
+    // Simulate form submission
+  setTimeout(() => { 
+    setSubmitted(true); 
+    setIsLoading(false); 
+  }, 1500); 
 };
-const handleChangeEmail = (e) => {
-  const value = e.target.value;
-  setFormData({ ...formData, email: value });
-};
-
-const isValidEmail = (email) => {
-  return /^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email);
-};
-
-const handleSubmit = (e) => {
-  e.preventDefault();
-
-  // ตรวจสอบอีเมล
-  if (!isValidEmail(formData.email)) {
-    Swal.fire({
-      icon: 'error',
-      title: 'ผิดพลาด',
-      text: 'กรุณากรอกอีเมลที่ถูกต้อง',
-    });
-    return;
-  }
-
-  setIsLoading(true);
-
-  // จำลองส่งฟอร์ม
-  setTimeout(() => {
-    setSubmitted(true);
-    setIsLoading(false);
-    }, 1000);
-  }
-
-
   return (
     <div className="contact-page">
       <div className="contact-container">
         <div className="contact-header">
-          <h1>Contact Us</h1>
+          <h1>Contact FC Barcelona</h1>
           <div className="header-line"></div>
-          <p>We'd love to hear from you. Send us a message and we'll respond as soon as possible.</p>
+          <p>
+            Connect with the Blaugrana family. We're here to assist you with all your Barcelona-related inquiries.
+          </p>
         </div>
 
         <div className="contact-form-box">
@@ -73,59 +86,81 @@ const handleSubmit = (e) => {
                   <path d="M5 13l4 4L19 7"></path>
                 </svg>
               </div>
-              <h2>Message Sent!</h2>
-              <p>Thank you for contacting us! We will get back to you soon.</p>
-              <button onClick={resetForm}>Send Another Message</button>
+              <h2>Visca Barça!</h2>
+              <p>
+                Thank you for contacting FC Barcelona! A member of our team will respond to your message soon. 
+                Together we are stronger!
+              </p>
+              <button className="success-button" onClick={resetForm}>
+                Send Another Message
+              </button>
             </div>
           ) : (
-            <form onSubmit={handleSubmit}>
-              <label>Full Name</label>
-              <input 
-                type="text"
-                name="name"
-                value={formData.name}
-                onChange={handleChange}
-                required
-                placeholder="Enter your full name"
-              />
+            <div className="form-container">
+              <div className="form-group">
+                <label htmlFor="name">Full Name</label>
+                <input 
+                  type="text"
+                  id="name"
+                  name="name"
+                  value={formData.name}
+                  onChange={handleChange}
+                  required
+                  placeholder="Enter your full name"
+                />
+              </div>
             
-              <label>Email Address</label>
-              <input 
-                type="email"
-                name="email"
-                value={formData.email}
-                onChange={handleChangeEmail}
-                required
-                placeholder="your.email@example.com"
-              />
+              <div className="form-group">
+                <label htmlFor="email">Email Address</label>
+                <input 
+                  type="email"
+                  id="email"
+                  name="email"
+                  value={formData.email}
+                  onChange={handleChangeEmail}
+                  required
+                  placeholder="your.email@example.com"
+                />
+              </div>
 
-              <label>Phone Number</label>
-              <input
-              type="tel"
-              name="Number"
-              value={formData.Number}
-              onChange={handleChangeNumber}
-              required
-              placeholder="5551234567"
-              />
+              <div className="form-group">
+                <label htmlFor="number">Phone Number</label>
+                <input
+                  type="tel"
+                  id="number"
+                  name="number"
+                  value={formData.number}
+                  onChange={handleChangeNumber}
+                  required
+                  placeholder="1234567890"
+                  minLength="10"
+                />
+              </div>
 
-              <label>Message</label>
-              <textarea 
-                name="message"
-                rows="5"
-                value={formData.message}
-                onChange={handleChange}
-                required
-                placeholder="Tell us how we can help you..."
-              />
+              <div className="form-group">
+                <label htmlFor="message">Message</label>
+                <textarea 
+                  id="message"
+                  name="message"
+                  rows="5"
+                  value={formData.message}
+                  onChange={handleChange}
+                  required
+                  placeholder="Share your thoughts about FC Barcelona, ask questions, or tell us how we can help you..."
+                />
+              </div>
 
-              <button type="submit" disabled={isLoading}>
+              <button 
+                onClick={handleSubmit} 
+                className="submit-button" 
+                disabled={isLoading}
+              >
                 {isLoading ? 'Sending...' : 'Send Message'}
               </button>
-            </form>
+            </div>
           )}
         </div>
       </div>
     </div>
   );
-};
+}
